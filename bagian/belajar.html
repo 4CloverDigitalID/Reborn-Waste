@@ -3,10 +3,105 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>belajar</title>
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<style>
+  .card-wrapper {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .card-img {
+    object-fit: cover;
+    width: 100%;
+    border-radius: 32px;
+  }
+  .lihat-btn {
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #1e7a56;
+    color: white;
+    border: none;
+    padding: 10px 36px;
+    border-radius: 50px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    white-space: nowrap;
+    z-index: 2;
+  }
+  .card-wrapper:hover .lihat-btn {
+    bottom: 40%;
+  }
+  .card-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(30, 122, 86, 0.35);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    border-radius: 32px;
+  }
+  .card-wrapper:hover .card-overlay {
+    opacity: 1;
+  }
+</style>
 </head>
-<body>
-  
+<body class="bg-gradient-to-r from-green-400 to-blue-500 min-h-screen flex flex-col items-center px-4 py-8">
+
+  <div class="flex flex-col items-center w-full max-w-5xl">
+    <h1 class="text-2xl sm:text-3xl lg:text-[40px] font-bold text-white text-center leading-tight">
+      Belajar Proses Pengolahan Sampah
+    </h1>
+    <p class="text-white text-sm font-light text-center mt-4 max-w-[487px]">
+      Belajar tentang bagaimana cara sampah dibuang dari awal sampai menjadi produk dengan hasil nyata.
+    </p>
+  </div>
+
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full max-w-5xl">
+
+    <div class="flex flex-col w-full">
+      <div class="card-wrapper">
+        <img src="img/Rectangle 14.webp" alt="" class="card-img h-[358px]">
+        <div class="card-overlay"></div>
+        <button class="lihat-btn">Lihat</button>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Pembuangan</h2>
+      <p class="text-white text-sm font-light mt-2">
+        Pilahlah sampah sesuai jenisnya agar dapat dikelola dengan lebih baik dan tidak mencemari lingkungan.
+      </p>
+    </div>
+
+    <div class="flex flex-col w-full">
+      <div class="card-wrapper">
+        <img src="img/Rectangle 15.jpeg" alt="" class="card-img h-[280px]">
+        <div class="card-overlay"></div>
+        <button class="lihat-btn">Lihat</button>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Proses Pengolahan</h2>
+      <p class="text-white text-sm font-light mt-2">
+        Pelajari bagaimana sampah diproses setelah dikumpulkan hingga siap untuk didaur ulang atau dimanfaatkan kembali.
+      </p>
+    </div>
+
+    <div class="flex flex-col w-full sm:col-span-2 lg:col-span-1">
+      <div class="card-wrapper">
+        <img src="img/Rectangle 16.webp" alt="" class="card-img h-[202px]">
+        <div class="card-overlay"></div>
+        <button class="lihat-btn">Lihat</button>
+      </div>
+      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Hasil Produk</h2>
+      <p class="text-white text-sm font-light mt-2">
+        Lihat bagaimana sampah yang diolah dapat berubah menjadi produk baru yang bermanfaat dan bernilai guna.
+      </p>
+    </div>
+
+  </div>
+
 </body>
 </html>
