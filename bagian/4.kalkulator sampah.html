@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kalkulator Harga Sampah - Reborn Waste</title>
+  <meta name="description" content="Hitung estimasi nilai ekonomis sampah daur ulang Anda berdasarkan kategori sampah dan beratnya secara mudah dan cepat.">
+  <!-- Tailwind CSS v4 -->
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <!-- Google Fonts: Inter & Dancing Script (for the handwriting quote) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .quote-font {
+      font-family: 'Dancing Script', cursive;
+    }
+    
+    /* Splatter SVG Animation */
+    .splatter-svg {
+      animation: float-splatter 20s ease-in-out infinite;
+      transform-origin: center;
+    }
+    .blob-1, .blob-2, .blob-3, .drop-1, .drop-2, .drop-3 {
+      transform-box: fill-box;
+      transform-origin: center;
+    }
+    .blob-1 {
+      animation: morph-blob-1 12s ease-in-out infinite;
+    }
+    .blob-2 {
+      animation: morph-blob-2 15s ease-in-out infinite alternate;
+    }
+    .blob-3 {
+      animation: morph-blob-3 18s ease-in-out infinite alternate;
+    }
+    .drop-1 {
+      animation: float-drop-1 8s ease-in-out infinite;
+    }
+    .drop-2 {
+      animation: float-drop-2 10s ease-in-out infinite;
+    }
+    .drop-3 {
+      animation: float-drop-3 9s ease-in-out infinite;
+    }
+
+    @keyframes float-splatter {
+      0%, 100% {
+        transform: translate(0, 0) scale(1.1) rotate(0deg);
+      }
+      50% {
+        transform: translate(3px, -5px) scale(1.12) rotate(1deg);
+      }
+    }
+    @keyframes morph-blob-1 {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.05) rotate(3deg) skewX(2deg); }
+    }
+    @keyframes morph-blob-2 {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(0.96) rotate(-4deg) skewY(-2deg); }
+    }
+    @keyframes morph-blob-3 {
+      0%, 100% { transform: scale(1) rotate(0deg); }
+      50% { transform: scale(1.03) rotate(5deg); }
+    }
+    @keyframes float-drop-1 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-8px, 10px) scale(0.9); }
+    }
+    @keyframes float-drop-2 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(12px, -8px) scale(1.1); }
+    }
+    @keyframes float-drop-3 {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(-6px, -12px) scale(0.95); }
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-b from-[#105d3b] via-[#0b482c] to-[#083a23] min-h-screen py-16 px-6 flex flex-col items-center justify-start gap-12 relative overflow-x-hidden">
+
+  <!-- Main Container -->
+  <main class="w-full max-w-[540px] flex flex-col items-center gap-10">
+    
+    <!-- Title & Description Header -->
+    <header class="text-center text-white max-w-md z-10">
+      <h1 class="text-3xl sm:text-[40px] font-extrabold tracking-tight leading-tight mb-3">
+        Kalkulator Harga Sampah
+      </h1>
+      <p class="text-xs sm:text-sm text-emerald-200/75 font-light leading-relaxed">
+        Ketahui harga sampah yang dapat dijual dan buat lingkungan menjadi lebih bersih
+      </p>
+    </header>
+
+    <!-- Calculator Card Section -->
+    <section class="relative w-full bg-gradient-to-br from-[#0c804f]/35 to-[#075936]/35 backdrop-blur-md rounded-[32px] border border-white/10 p-8 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.35)] z-10">
+      
+      <!-- Decorative Floating Sphere in Background (aligned with top-right of the card) -->
+      <div class="absolute -top-12 -right-8 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[#a7f3d0]/30 to-[#0d9488]/30 blur-[2px] -z-10 animate-pulse pointer-events-none"></div>
+
+      <!-- Form Inputs -->
+      <div class="flex flex-col gap-6">
+        
+        <!-- Input Row 1: Sampah Select & Stepper -->
+        <div class="flex flex-col gap-2">
+          <label for="jenisSampah" class="text-white text-base font-semibold">Sampah</label>
+          <div class="flex items-center gap-3 w-full">
+            <!-- Dropdown Select -->
+            <div class="relative flex-1">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none">▼</span>
+              <select id="jenisSampah" class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer appearance-none">
+                <option value="" disabled selected>Jenis sampah ....</option>
+                <option value="1">Plastik Campuran</option>
+                <option value="2">Botol Plastik PET</option>
+                <option value="3">Kardus</option>
+                <option value="4">Kertas</option>
+                <option value="5">Kaleng Aluminium</option>
+                <option value="6">Besi Bekas</option>
+                <option value="7">Kaca</option>
+              </select>
+            </div>
+            
+            <!-- Weight Stepper -->
+            <div class="flex items-center gap-2">
+              <button type="button" id="btn-decrement" aria-label="Kurangi Berat" class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">◀</button>
+              <div class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-emerald-950 text-sm">
+                <input type="number" id="beratSampah" value="0" min="0" max="1000" step="1" class="w-full text-center bg-transparent focus:outline-none border-none font-bold text-emerald-950 p-0 m-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+              </div>
+              <button type="button" id="btn-increment" aria-label="Tambah Berat" class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">▶</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Input Row 2: Harga Output & unit label (KG) -->
+        <div class="flex flex-col gap-2">
+          <label for="hargaTotalDisplay" class="text-white text-base font-semibold">Harga</label>
+          <div class="flex items-center gap-3 w-full">
+            <!-- Price Display input -->
+            <div class="relative flex-1">
+              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                <!-- SVG Price Tag Icon -->
+                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                  <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+                </svg>
+              </span>
+              <input type="text" id="hargaTotalDisplay" placeholder="Rp.000.000.000" readonly class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-bold text-sm focus:outline-none cursor-not-allowed">
+            </div>
+            
+            <!-- Static KG Box -->
+            <div class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-gray-500 text-sm select-none">
+              KG
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="button" id="btn-hitung" class="w-full bg-[#0a402a] hover:bg-[#072c1c] active:scale-[0.98] text-white font-bold py-4 rounded-[18px] mt-4 shadow-md transition-all duration-200 cursor-pointer text-center text-sm tracking-wide">
+          Lihat Harga
+        </button>
+
+      </div>
+
+      <!-- Result Card Dropdown (Initially Hidden) -->
+      <div id="hasil-kalkulasi" class="hidden mt-8 pt-6 border-t border-white/10 w-full animate-fade-in">
+        <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+          Hasil Estimasi
+        </h3>
+        <div class="grid grid-cols-2 gap-4 text-white text-xs mb-4">
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+            <span class="text-emerald-300 font-medium block mb-1">Jenis Sampah</span>
+            <span id="res-jenis" class="text-sm font-bold">Botol Plastik PET</span>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+            <span class="text-emerald-300 font-medium block mb-1">Berat Total</span>
+            <span id="res-berat" class="text-sm font-bold">5 kg</span>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+            <span class="text-emerald-300 font-medium block mb-1">Harga / Kg</span>
+            <span id="res-harga-kg" class="text-sm font-bold">Rp4.000</span>
+          </div>
+          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+            <span class="text-emerald-300 font-medium block mb-1">Kategori</span>
+            <span id="res-kategori" class="text-sm font-bold">Anorganik</span>
+          </div>
+        </div>
+        
+        <div class="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-4 text-center mb-4">
+          <span class="text-emerald-300 text-xs font-semibold block mb-1">Total Pendapatan</span>
+          <span id="res-total" class="text-xl sm:text-2xl font-extrabold text-emerald-400">Rp20.000</span>
+        </div>
+
+        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+          <h4 class="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+            ♻️ Manfaat Daur Ulang
+          </h4>
+          <p id="res-manfaat" class="text-xs text-white/90 leading-relaxed font-light">
+            Dapat didaur ulang menjadi serat tekstil, pot tanaman, atau produk plastik baru.
+          </p>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Bottom Quote Section with splatter SVG background -->
+    <section class="relative w-full flex items-center justify-center py-24 px-8 max-w-[650px]">
+      <!-- SPLATTER SVG BACKGROUND -->
+      <svg viewBox="0 0 400 300" class="splatter-svg absolute inset-0 w-full h-full fill-emerald-500/25 -z-10 filter blur-[0.5px] pointer-events-none">
+        <path class="blob-1" d="M200 40 C250 30, 280 80, 310 110 C340 140, 370 180, 350 220 C330 260, 270 270, 220 280 C170 290, 110 280, 80 240 C50 200, 30 150, 60 110 C90 70, 150 50, 200 40" />
+        <path class="blob-2" d="M120 70 C140 50, 180 60, 200 80 C220 100, 210 130, 190 150 C170 170, 130 180, 110 160 C90 140, 100 90, 120 70" />
+        <path class="blob-3" d="M260 180 C280 160, 310 170, 330 190 C350 210, 340 240, 320 250 C300 260, 270 250, 250 230 C230 210, 240 200, 260 180" />
+        <circle class="drop-1" cx="85" cy="55" r="7" />
+        <circle class="drop-2" cx="65" cy="210" r="9" />
+        <circle class="drop-3" cx="315" cy="65" r="6" />
+        <circle class="drop-1" cx="345" cy="115" r="5" />
+        <circle class="drop-2" cx="155" cy="245" r="8" />
+        <circle class="drop-3" cx="285" cy="75" r="10" />
+      </svg>
+      <!-- Quote Content -->
+      <blockquote class="quote-font text-white text-center leading-relaxed text-2xl sm:text-3xl lg:text-[38px] select-none">
+        "Lingkungan bukanlah milik siapa pun untuk dihancurkan; itu tanggung jawab semua orang untuk melindunginya."
+      </blockquote>
+    </section>
+
+  </main>
+
+  <script>
+    const dataSampah = [
+      {
+        id: 1,
+        nama: "Plastik Campuran",
+        hargaPerKg: 2000,
+        kategori: "Anorganik",
+        manfaat: "Dapat dibuat tas, wadah, atau dipellet plastik baru"
+      },
+      {
+        id: 2,
+        nama: "Botol Plastik PET",
+        hargaPerKg: 4000,
+        kategori: "Anorganik",
+        manfaat: "Dapat didaur ulang menjadi serat tekstil, pot tanaman, atau produk plastik baru"
+      },
+      {
+        id: 3,
+        nama: "Kardus",
+        hargaPerKg: 1500,
+        kategori: "Anorganik",
+        manfaat: "Dapat dibuat kertas daur ulang, papan, atau bahan kemasan baru"
+      },
+      {
+        id: 4,
+        nama: "Kertas",
+        hargaPerKg: 1000,
+        kategori: "Anorganik",
+        manfaat: "Dapat diproses menjadi kertas baru atau produk pulp"
+      },
+      {
+        id: 5,
+        nama: "Kaleng Aluminium",
+        hargaPerKg: 8000,
+        kategori: "Anorganik",
+        manfaat: "Dapat dimelt ulang menjadi kaleng baru, komponen otomotif, atau peralatan rumah tangga"
+      },
+      {
+        id: 6,
+        nama: "Besi Bekas",
+        hargaPerKg: 3000,
+        kategori: "Anorganik",
+        manfaat: "Dapat dipeletin atau dijual ke industri konstruksi dan manufaktur"
+      },
+      {
+        id: 7,
+        nama: "Kaca",
+        hargaPerKg: 500,
+        kategori: "Anorganik",
+        manfaat: "Dapat dilebur ulang menjadi botol, kontainer, atau material dekoratif"
+      }
+    ];
+
+    // DOM Elements
+    const selectSampah = document.getElementById("jenisSampah");
+    const inputBerat = document.getElementById("beratSampah");
+    const btnDecrement = document.getElementById("btn-decrement");
+    const btnIncrement = document.getElementById("btn-increment");
+    const inputHarga = document.getElementById("hargaTotalDisplay");
+    const btnHitung = document.getElementById("btn-hitung");
+    const resultsContainer = document.getElementById("hasil-kalkulasi");
+
+    function formatRupiah(number) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0
+      }).format(number);
+    }
+
+    // Update real-time price display on input change
+    function updatePriceDisplay() {
+      const selectVal = selectSampah.value;
+      const beratVal = parseFloat(inputBerat.value) || 0;
+
+      if (!selectVal || beratVal <= 0) {
+        inputHarga.value = "Rp.000.000.000";
+        return;
+      }
+
+      const item = dataSampah.find(s => s.id == selectVal);
+      if (item) {
+        const total = beratVal * item.hargaPerKg;
+        inputHarga.value = formatRupiah(total);
+      }
+    }
+
+    // Stepper Button Functions
+    btnDecrement.addEventListener("click", () => {
+      let val = parseInt(inputBerat.value) || 0;
+      if (val > 0) {
+        inputBerat.value = Math.max(0, val - 1);
+        updatePriceDisplay();
+      }
+    });
+
+    btnIncrement.addEventListener("click", () => {
+      let val = parseInt(inputBerat.value) || 0;
+      inputBerat.value = val + 1;
+      updatePriceDisplay();
+    });
+
+    // Real-time Event Listeners
+    inputBerat.addEventListener("input", () => {
+      // Prevent negative weights
+      let val = parseFloat(inputBerat.value) || 0;
+      if (val < 0) inputBerat.value = 0;
+      updatePriceDisplay();
+    });
+    selectSampah.addEventListener("change", updatePriceDisplay);
+
+    // Calculate Button Trigger
+    btnHitung.addEventListener("click", () => {
+      const selectVal = selectSampah.value;
+      const beratVal = parseFloat(inputBerat.value) || 0;
+
+      if (!selectVal || beratVal <= 0) {
+        alert("Silakan pilih jenis sampah dan masukkan berat yang valid!");
+        return;
+      }
+
+      const item = dataSampah.find(s => s.id == selectVal);
+      if (item) {
+        const total = beratVal * item.hargaPerKg;
+        
+        // Populate results
+        document.getElementById("res-jenis").textContent = item.nama;
+        document.getElementById("res-berat").textContent = `${beratVal} kg`;
+        document.getElementById("res-harga-kg").textContent = `${formatRupiah(item.hargaPerKg)}`;
+        document.getElementById("res-kategori").textContent = item.kategori;
+        document.getElementById("res-total").textContent = formatRupiah(total);
+        document.getElementById("res-manfaat").textContent = item.manfaat;
+
+        // Slide down the results container
+        resultsContainer.classList.remove("hidden");
+        resultsContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+  </script>
+</body>
+</html>
