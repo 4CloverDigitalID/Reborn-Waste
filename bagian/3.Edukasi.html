@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edukasi Vidio - Reborn Waste</title>
+  <meta name="description" content="Koleksi video edukasi seputar pengolahan sampah dan kelestarian lingkungan dari Reborn Waste.">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#1a6f4a] min-h-screen flex flex-col items-center justify-start py-12 px-6 md:px-12">
+
+  <main class="w-full max-w-5xl flex flex-col items-center">
+    <h1 class="sr-only">Edukasi Vidio Seputar Sampah - Reborn Waste</h1>
+
+    <header class="w-full rounded-[24px] overflow-hidden shadow-2xl mb-10 transition-transform duration-500 hover:scale-[1.01] bg-emerald-800/20">
+      <img src="img/Berita%20Terkini%20(1)%201.png" alt="Banner Edukasi Vidio Seputar Sampah - Reborn Waste" class="w-full h-auto object-cover block">
+    </header>
+
+    <section class="w-full">
+      <h2 class="sr-only">Daftar Video Edukasi</h2>
+      <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const link = [
+      {
+        "judul" : "Yuk, Memilah Sampah - Video Edukasi PHINLA",
+        "url" : "https://youtu.be/37Yj84NjCGU?si=XJAEULcxmcRy-QHB"
+      },
+      {
+        "judul" : "Sampah Sandi (Animasi, 2019)",
+        "url" : "https://youtu.be/snRhl3ING0Y?si=UM7XYL7OWg7z9xjo"
+      },
+      {
+        "judul" : "Video Edukasi : Membuang Sampah pada Tempatnya",
+        "url" : "https://youtu.be/eIYVJKGmPXk?si=zJ2UALUhhbolmsGP"
+      },
+      {
+        "judul" : "Video Animasi Cara Pengelolaan Sampah, \"Sampahku Tanggung Jawabku\"",
+        "url" : "https://youtu.be/CGd3lgxReFE?si=KiO8TjcLhlF5ppFg"
+      },
+      {
+        "judul" : "Iklan Layanan Masyarakat | BUANGLAH SAMPAH PADA TEMPATNYA",
+        "url" : "https://youtu.be/-0-uEnBUgeA?si=tt6DLCrexIGi-vQ0"
+      },
+      {
+        "judul" : "Sejauh Mana Masalah Sampah di Indonesia?",
+        "url" : "https://youtu.be/i0bb7Et0ots?si=NLVki2bRdGdw3A-V"
+      }
+    ];
+
+    function getYoutubeId(url) {
+      if (url.includes('youtu.be/')) {
+        return url.split('youtu.be/')[1].split('?')[0];
+      } else if (url.includes('v=')) {
+        return url.split('v=')[1].split('&')[0];
+      }
+      return '';
+    }
+
+    const grid = document.getElementById('video-grid');
+    link.forEach((item, index) => {
+      const id = getYoutubeId(item.url);
+      const thumbnailUrl = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
+      
+      const card = document.createElement('a');
+      card.href = item.url;
+      card.id = `video-card-${id || index}`;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.className = 'group relative block aspect-[16/9] w-full rounded-[20px] overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-emerald-950/40';
+      
+      card.innerHTML = `
+        <img src="${thumbnailUrl}" alt="${item.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-center justify-center p-4">
+          <!-- YouTube Play Button Icon -->
+          <div class="w-14 h-10 bg-[#FF0000] rounded-xl flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 24 24">
+              <path d="M8 5v14l11-7z"/>
+            </svg>
+          </div>
+          <!-- Title -->
+          <p class="text-white text-xs font-semibold mt-3 text-center px-2 line-clamp-2 drop-shadow-md">
+            ${item.judul}
+          </p>
+        </div>
+      `;
+      
+      grid.appendChild(card);
+    });
+  </script>
+</body>
+</html>
