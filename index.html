@@ -9,6 +9,8 @@
   <!-- CDN Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.25/dist/lenis.css">
+  <script src="https://unpkg.com/lenis@1.3.25/dist/lenis.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -1111,9 +1113,171 @@
     body {
       padding-top: 76px;
     }
+
+    /* ── Modal Styles ── */
+    #belajar-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      pointer-events: none;
+      opacity: 0;
+    }
+    #belajar-modal.is-open {
+      pointer-events: all;
+    }
+    #modal-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    #modal-box {
+      position: relative;
+      background: linear-gradient(145deg, #0d5a42, #0a402a);
+      border: 1px solid rgba(190, 254, 227, 0.15);
+      border-radius: 28px;
+      overflow-y: auto;
+      width: 100%;
+      max-width: 580px;
+      max-height: 85vh;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(190,254,227,0.08);
+      scrollbar-width: thin;
+      scrollbar-color: rgba(190, 254, 227, 0.3) transparent;
+    }
+    #modal-box::-webkit-scrollbar {
+      width: 6px;
+    }
+    #modal-box::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    #modal-box::-webkit-scrollbar-thumb {
+      background: rgba(190, 254, 227, 0.3);
+      border-radius: 10px;
+    }
+    #modal-box::-webkit-scrollbar-thumb:hover {
+      background: rgba(190, 254, 227, 0.5);
+    }
+    #modal-hero-img {
+      width: 100%;
+      height: 240px;
+      object-fit: cover;
+      display: block;
+    }
+    .modal-body {
+      padding: 28px 32px 32px;
+    }
+    .modal-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(190, 254, 227, 0.12);
+      border: 1px solid rgba(190, 254, 227, 0.25);
+      color: #BEFEE3;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 14px;
+    }
+    .modal-title {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+    .modal-desc {
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.78);
+      line-height: 1.75;
+      margin-bottom: 20px;
+    }
+    .modal-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .modal-step {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 12px 16px;
+    }
+    .modal-step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #BEFEE3;
+      color: #0a402a;
+      font-size: 0.78rem;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .modal-step-text {
+      color: rgba(255,255,255,0.85);
+      font-size: 0.84rem;
+      line-height: 1.55;
+      padding-top: 4px;
+    }
+    #modal-close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.35);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: white;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+      transition: background 0.2s ease, transform 0.2s ease;
+      z-index: 10;
+    }
+    #modal-close-btn:hover {
+      background: rgba(255,255,255,0.15);
+      transform: scale(1.1);
+    }
   </style>
 </head>
 <body class="min-h-screen flex flex-col justify-start">
+
+  <!-- BELAJAR MODAL -->
+  <div id="belajar-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-text" data-lenis-prevent>
+    <div id="modal-backdrop"></div>
+    <div id="modal-box">
+      <button id="modal-close-btn" aria-label="Tutup modal">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <img id="modal-hero-img" src="" alt="">
+      <div class="modal-body">
+        <div class="modal-tag" id="modal-tag-text">♻️ Edukasi Sampah</div>
+        <h3 class="modal-title" id="modal-title-text"></h3>
+        <p class="modal-desc" id="modal-desc-text"></p>
+        <div class="modal-steps" id="modal-steps-container"></div>
+      </div>
+    </div>
+  </div>
 
   <!-- LOADER SCREEN -->
   <div id="loader-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0a402a] text-white">
@@ -1384,7 +1548,7 @@
       <div class="card-wrapper">
         <img src="bagian/img/Rectangle 14.webp" alt="" class="card-img h-[358px]">
         <div class="card-overlay"></div>
-        <button class="lihat-btn">Lihat</button>
+        <button class="lihat-btn" data-modal="pembuangan">Lihat</button>
       </div>
       <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Pembuangan</h2>
       <p class="text-white text-sm font-light mt-2">
@@ -1396,7 +1560,7 @@
       <div class="card-wrapper">
         <img src="bagian/img/Rectangle 15.jpeg" alt="" class="card-img h-[280px]">
         <div class="card-overlay"></div>
-        <button class="lihat-btn">Lihat</button>
+        <button class="lihat-btn" data-modal="pengolahan">Lihat</button>
       </div>
       <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Proses Pengolahan</h2>
       <p class="text-white text-sm font-light mt-2">
@@ -1408,7 +1572,7 @@
       <div class="card-wrapper">
         <img src="bagian/img/Rectangle 16.webp" alt="" class="card-img h-[202px]">
         <div class="card-overlay"></div>
-        <button class="lihat-btn">Lihat</button>
+        <button class="lihat-btn" data-modal="produk">Lihat</button>
       </div>
       <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Hasil Produk</h2>
       <p class="text-white text-sm font-light mt-2">
@@ -2340,6 +2504,27 @@
     // ── GSAP SCROLLTRIGGER ANIMATIONS ──
     gsap.registerPlugin(ScrollTrigger);
 
+    // ── LENIS SMOOTH SCROLL ──
+    // Initialize Lenis for buttery-smooth scrolling
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      smoothWheel: true,
+    });
+
+    // Sync Lenis scroll events with GSAP ScrollTrigger
+    lenis.on('scroll', ScrollTrigger.update);
+
+    // Drive Lenis from GSAP's ticker so they share one RAF loop
+    gsap.ticker.add((time) => {
+      lenis.raf(time * 1000);
+    });
+    gsap.ticker.lagSmoothing(0);
+
+    // Make navbar scroll listener use Lenis's scroll position
+    lenis.on('scroll', updateNavbarTheme);
+    lenis.on('scroll', updateActiveNav);
+
     // Helper — fade + rise from below, fires once on scroll-in
     function revealUp(targets, opts = {}) {
       if (!targets || (targets instanceof NodeList && targets.length === 0)) return;
@@ -2538,6 +2723,125 @@
         duration: 1.0,
         ease: "power4.out"
       }, "-=1.1");
+    });
+
+    // ── BELAJAR MODAL SYSTEM ──
+    const modalData = {
+      pembuangan: {
+        img: 'bagian/img/Rectangle 14.webp',
+        tag: '🗑️ Pembuangan Sampah',
+        title: 'Pembuangan & Pemilahan Sampah',
+        desc: 'Langkah pertama yang paling penting dalam pengelolaan sampah adalah membuang sampah sesuai jenisnya sejak dari sumbernya. Pemilahan yang benar memudahkan proses daur ulang dan mencegah kontaminasi.',
+        steps: [
+          'Pisahkan sampah <strong>organik</strong> (sisa makanan, daun) ke tempat sampah hijau.',
+          'Pisahkan sampah <strong>anorganik</strong> (plastik, kertas, logam) ke tempat sampah kuning.',
+          'Pisahkan sampah <strong>B3</strong> (baterai, lampu bekas, obat) ke tempat sampah merah khusus.',
+          'Jangan membuang sampah sembarangan — buang di TPS atau bank sampah terdekat.',
+          'Biasakan memilah sampah sejak dini agar menjadi kebiasaan baik di keluarga.',
+        ]
+      },
+      pengolahan: {
+        img: 'bagian/img/Rectangle 15.jpeg',
+        tag: '⚙️ Proses Pengolahan',
+        title: 'Proses Pengolahan Sampah',
+        desc: 'Setelah dikumpulkan, sampah melewati serangkaian proses sebelum dapat didaur ulang atau dimanfaatkan. Setiap tahap sangat penting untuk memastikan sampah diolah secara optimal dan aman bagi lingkungan.',
+        steps: [
+          '<strong>Pengumpulan</strong> — Sampah dari rumah tangga dikumpulkan oleh petugas kebersihan ke TPS.',
+          '<strong>Pemilahan Lanjut</strong> — Di TPS/TPA, sampah dipilah lebih detail berdasarkan material.',
+          '<strong>Pengomposan</strong> — Sampah organik diolah menjadi kompos melalui proses fermentasi alami.',
+          '<strong>Daur Ulang</strong> — Sampah anorganik seperti plastik dan kertas dikirim ke pabrik daur ulang.',
+          '<strong>Penanganan Residu</strong> — Sampah yang tidak bisa didaur ulang diproses di TPST atau sanitary landfill.',
+        ]
+      },
+      produk: {
+        img: 'bagian/img/Rectangle 16.webp',
+        tag: '✨ Hasil Produk',
+        title: 'Produk Hasil Daur Ulang',
+        desc: 'Sampah yang telah melalui proses pengolahan yang benar dapat berubah menjadi produk-produk baru yang bernilai ekonomi tinggi dan ramah lingkungan. Ini adalah bukti nyata konsep ekonomi sirkular.',
+        steps: [
+          '<strong>Kompos Organik</strong> — Sisa makanan dan daun menjadi pupuk kompos berkualitas tinggi untuk pertanian.',
+          '<strong>Produk Plastik Baru</strong> — Botol PET daur ulang menjadi serat tekstil, pot tanaman, atau kemasan baru.',
+          '<strong>Kertas Daur Ulang</strong> — Kertas bekas diolah menjadi karton, tisu, atau kertas bungkus baru.',
+          '<strong>Logam Leburan</strong> — Kaleng dan besi bekas dilebur kembali menjadi bahan baku industri.',
+          '<strong>Biogas & Energi</strong> — Sampah organik tertentu dapat diubah menjadi biogas sebagai sumber energi terbarukan.',
+        ]
+      }
+    };
+
+    const modal       = document.getElementById('belajar-modal');
+    const modalBox    = document.getElementById('modal-box');
+    const modalBg     = document.getElementById('modal-backdrop');
+    const modalImg    = document.getElementById('modal-hero-img');
+    const modalTag    = document.getElementById('modal-tag-text');
+    const modalTitle  = document.getElementById('modal-title-text');
+    const modalDesc   = document.getElementById('modal-desc-text');
+    const modalSteps  = document.getElementById('modal-steps-container');
+    const modalClose  = document.getElementById('modal-close-btn');
+
+    function openModal(key) {
+      const data = modalData[key];
+      if (!data) return;
+
+      // Populate content
+      modalImg.src    = data.img;
+      modalImg.alt    = data.title;
+      modalTag.innerHTML = data.tag;
+      modalTitle.textContent = data.title;
+      modalDesc.textContent  = data.desc;
+      modalSteps.innerHTML   = data.steps.map((s, i) =>
+        `<div class="modal-step">
+          <div class="modal-step-num">${i + 1}</div>
+          <p class="modal-step-text">${s}</p>
+        </div>`
+      ).join('');
+
+      // Lock background scroll natively and stop Lenis scroll
+      document.documentElement.style.overflow = 'hidden';
+      if (typeof lenis !== 'undefined') lenis.stop();
+
+      // Show modal
+      modal.classList.add('is-open');
+      gsap.killTweensOf([modal, modalBox]);
+
+      gsap.fromTo(modal,
+        { opacity: 0 },
+        { opacity: 1, duration: 0.35, ease: 'power2.out' }
+      );
+      gsap.fromTo(modalBox,
+        { opacity: 0, scale: 0.85, y: 40 },
+        { opacity: 1, scale: 1, y: 0, duration: 0.45, ease: 'back.out(1.4)' }
+      );
+    }
+
+    function closeModal() {
+      gsap.killTweensOf([modal, modalBox]);
+      gsap.to(modalBox, { opacity: 0, scale: 0.9, y: 20, duration: 0.3, ease: 'power2.in' });
+      gsap.to(modal, {
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power2.in',
+        onComplete: () => {
+          modal.classList.remove('is-open');
+          document.documentElement.style.overflow = '';
+          if (typeof lenis !== 'undefined') lenis.start();
+        }
+      });
+    }
+
+    // Wire up buttons
+    document.querySelectorAll('.lihat-btn[data-modal]').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.dataset.modal));
+    });
+
+    // Close on X button
+    modalClose.addEventListener('click', closeModal);
+
+    // Close on backdrop click
+    modalBg.addEventListener('click', closeModal);
+
+    // Close on ESC key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
   </script>
 
