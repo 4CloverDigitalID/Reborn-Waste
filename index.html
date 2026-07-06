@@ -7,6 +7,8 @@
   <meta name="description" content="Platform edukasi pengolahan sampah, data sampah, dan kalkulator nilai sampah daur ulang.">
   
   <!-- CDN Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -1113,6 +1115,34 @@
 </head>
 <body class="min-h-screen flex flex-col justify-start">
 
+  <!-- LOADER SCREEN -->
+  <div id="loader-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0a402a] text-white">
+    <!-- Minimalist Circular Progress Indicator -->
+    <div class="relative w-28 h-28 mb-6 flex items-center justify-center">
+      <svg class="w-full h-full transform -rotate-90">
+        <circle cx="56" cy="56" r="50" class="stroke-[#062c1d]" stroke-width="6" fill="transparent" />
+        <circle id="loader-progress-circle" cx="56" cy="56" r="50" class="stroke-[#BEFEE3]" stroke-width="6" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" fill="transparent" />
+      </svg>
+      <!-- Centered Logo -->
+      <div class="absolute inset-0 flex items-center justify-center" id="loader-logo-container">
+        <img src="bagian/img/logo.svg" alt="Logo" class="w-12 h-12" id="loader-logo">
+      </div>
+    </div>
+
+    <!-- Title & Counter -->
+    <div class="text-center">
+      <h2 class="text-3xl font-extrabold tracking-wide mb-2 opacity-0" id="loader-title">
+        ReBorn <span class="text-[#BEFEE3]">Waste</span>
+      </h2>
+      <p class="text-emerald-300 font-semibold text-lg opacity-0" id="loader-counter-text">0%</p>
+    </div>
+
+    <!-- Subtitle -->
+    <p class="absolute bottom-12 text-emerald-400/60 text-xs tracking-widest uppercase opacity-0" id="loader-subtitle">
+      Menuju Jakarta Hijau & Berkelanjutan
+    </p>
+  </div>
+
   <!-- NAVBAR -->
 <nav id="main-navbar" class="main-navbar">
   <!-- Left: Logo + Name pill -->
@@ -1153,18 +1183,24 @@
   class="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat -mt-[76px] pt-[76px]"
   style="background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)); background-attachment: fixed;"
 >
-  <img src="bagian/img/hero.png" alt="Hero Background" class="absolute inset-0 w-full h-full object-cover z-0">
-  
+  <video autoplay loop muted playsinline preload="auto" poster="bagian/img/hero.png" class="absolute inset-0 w-full h-full object-cover z-0">
+    <source src="bagian/img/hero_720p.webm" type="video/webm">
+    <source src="bagian/img/hero_720p.mp4" type="video/mp4">
+    Your browser does not support the video tag.
+  </video>
+  <!-- Overlay to darken video for better readability -->
+  <div class="absolute inset-0 bg-black/45 z-5 pointer-events-none"></div>
+
   <!-- Content -->
   <div class="relative z-10 w-full h-full flex flex-col items-center sm:items-start justify-center px-6 sm:ml-5 sm:px-8 md:px-12 pb-20 sm:pb-0">
     <div class="flex flex-col items-center sm:items-start max-w-3xl">
       <!-- Heading -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6 drop-shadow-lg text-center sm:text-left">
-        Ciptakan Jakarta Bebas <br> Sampah, <span class="text-[#BEFEE3]">Mulai Dari Genggaman Mu</span>
+      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6 text-center sm:text-left" style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.65);">
+        Ciptakan Jakarta Bebas <br> Sampah, <span class="text-[#BEFEE3]" style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.7);">Mulai Dari Genggaman Mu</span>
       </h1>
 
       <!-- Subtitle -->
-      <p class="text-base sm:text-lg md:text-lg text-gray-100 font-light leading-relaxed mb-10 drop-shadow-md max-w-xl text-center sm:text-left">
+      <p class="text-base sm:text-lg md:text-lg text-gray-100 font-light leading-relaxed mb-10 max-w-xl text-center sm:text-left" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.7);">
         Platform pintar untuk memonitor, mengelola, dan mengedukasi masyarakat Jakarta dalam mewujudkan ekosistem kota yang berkelanjutan.
       </p>
 
@@ -2299,6 +2335,209 @@
       btn.addEventListener('click', () => {
         navMobileMenu.classList.remove('open');
       });
+    });
+
+    // ── GSAP SCROLLTRIGGER ANIMATIONS ──
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Helper — fade + rise from below, fires once on scroll-in
+    function revealUp(targets, opts = {}) {
+      if (!targets || (targets instanceof NodeList && targets.length === 0)) return;
+      gsap.from(targets, {
+        opacity: 0,
+        y: opts.y ?? 60,
+        duration: opts.duration ?? 0.9,
+        stagger: opts.stagger ?? 0,
+        ease: opts.ease ?? 'power3.out',
+        scrollTrigger: {
+          trigger: opts.trigger ?? (targets instanceof NodeList ? targets[0] : targets),
+          start: opts.start ?? 'top 88%',
+          toggleActions: 'play none none none',
+        }
+      });
+    }
+
+    // Helper — slide in from left
+    function revealLeft(el, triggerEl) {
+      if (!el) return;
+      gsap.from(el, {
+        opacity: 0, x: -80, duration: 1.0, ease: 'power3.out',
+        scrollTrigger: { trigger: triggerEl ?? el, start: 'top 85%', toggleActions: 'play none none none' }
+      });
+    }
+
+    // Helper — slide in from right
+    function revealRight(el, triggerEl) {
+      if (!el) return;
+      gsap.from(el, {
+        opacity: 0, x: 80, duration: 1.0, ease: 'power3.out',
+        scrollTrigger: { trigger: triggerEl ?? el, start: 'top 85%', toggleActions: 'play none none none' }
+      });
+    }
+
+    // ── ABOUT SECTION ──
+    (() => {
+      const sec = document.querySelector('#About');
+      if (!sec) return;
+      const cols = sec.querySelectorAll('#About > div > div > div');
+      revealLeft(cols[0], sec);
+      revealUp(cols[1], { trigger: sec, duration: 1.0 });
+      revealRight(cols[2], sec);
+    })();
+
+    // ── KEUNGGULAN SECTION ──
+    (() => {
+      const sec = document.querySelector('#keunggulan-section');
+      if (!sec) return;
+      revealUp(sec.querySelector('.text-center'), { trigger: sec, duration: 0.8 });
+      revealUp(sec.querySelectorAll('.group'), { trigger: sec, stagger: 0.18, start: 'top 80%' });
+    })();
+
+    // ── BELAJAR SECTION ──
+    (() => {
+      const sec = document.querySelector('#belajar-section');
+      if (!sec) return;
+      revealUp(sec.querySelector('.flex.flex-col.items-center.w-full'), { trigger: sec, duration: 0.8 });
+      revealUp(sec.querySelectorAll('.grid > div'), { trigger: sec, stagger: 0.20, start: 'top 82%' });
+    })();
+
+    // ── DATA SECTION ──
+    (() => {
+      const sec = document.querySelector('#data-section');
+      if (!sec) return;
+      revealUp(sec.querySelector('.header'), { trigger: sec, duration: 0.9 });
+      gsap.from(sec.querySelector('.carousel-shell'), {
+        opacity: 0, scale: 0.92, y: 50, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: sec, start: 'top 78%', toggleActions: 'play none none none' }
+      });
+    })();
+
+    // ── EDUKASI SECTION ──
+    (() => {
+      const sec = document.querySelector('#edukasi-section');
+      if (!sec) return;
+      revealUp(sec.querySelector('header'), { trigger: sec, duration: 0.9 });
+      revealUp(sec.querySelector('#video-grid'), { trigger: sec, start: 'top 82%', duration: 1.0 });
+    })();
+
+    // ── KALKULATOR SECTION ──
+    (() => {
+      const sec = document.querySelector('#kalkulator-section');
+      if (!sec) return;
+      revealUp(sec.querySelector('header'), { trigger: sec, duration: 0.8 });
+      gsap.from(sec.querySelector('section'), {
+        opacity: 0, y: 70, scale: 0.96, duration: 1.1, ease: 'power3.out',
+        scrollTrigger: { trigger: sec, start: 'top 82%', toggleActions: 'play none none none' }
+      });
+      const quote = sec.querySelector('blockquote');
+      if (quote) {
+        gsap.from(quote, {
+          opacity: 0, y: 40, duration: 1.1, ease: 'power2.out',
+          scrollTrigger: { trigger: quote, start: 'top 90%', toggleActions: 'play none none none' }
+        });
+      }
+    })();
+
+    // ── FOOTER ──
+    (() => {
+      const footer = document.querySelector('footer');
+      if (!footer) return;
+      gsap.from(footer, {
+        opacity: 0, y: 60, duration: 1.0, ease: 'power3.out',
+        scrollTrigger: { trigger: footer, start: 'top 95%', toggleActions: 'play none none none' }
+      });
+    })();
+
+    // ── GSAP LOADING SCREEN ANIMATIONS ──
+    document.addEventListener("DOMContentLoaded", () => {
+      // Prevent scrolling while loading
+      document.body.style.overflow = "hidden";
+
+      // Select elements
+      const progressCircle = document.getElementById("loader-progress-circle");
+      const counterText = document.getElementById("loader-counter-text");
+      const loaderScreen = document.getElementById("loader-screen");
+      
+      const totalLength = 314.16; // 2 * Math.PI * r (r=50)
+
+      // Set initial values
+      gsap.set(progressCircle, { strokeDashoffset: totalLength });
+
+      // 1. Start infinite logo pulsing separately so it doesn't block timeline completion
+      const logoPulse = gsap.to("#loader-logo", { scale: 1.15, duration: 0.8, yoyo: true, repeat: -1, ease: "power1.inOut" });
+
+      // Create a master timeline
+      const tl = gsap.timeline({
+        onComplete: () => {
+          // Restore scrolling
+          document.body.style.overflow = "";
+          logoPulse.kill();
+        }
+      });
+
+      // 2. Fade-in loader text & indicator details
+      tl.to("#loader-title", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" })
+        .to("#loader-counter-text", { opacity: 1, duration: 0.4 }, "-=0.3")
+        .to("#loader-subtitle", { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, "-=0.4");
+
+      // 2. Count progress from 0 to 100
+      const progressValue = { val: 0 };
+      tl.to(progressValue, {
+        val: 100,
+        duration: 2.0,
+        ease: "power2.out",
+        onUpdate: () => {
+          const currentProgress = Math.round(progressValue.val);
+          counterText.textContent = `${currentProgress}%`;
+          const offset = totalLength - (currentProgress / 100) * totalLength;
+          progressCircle.style.strokeDashoffset = offset;
+        }
+      }, "-=0.2");
+
+      // 3. Exit animations for loading screen elements
+      tl.to("#loader-logo-container, #loader-title, #loader-counter-text, #loader-subtitle", {
+        opacity: 0,
+        y: -30,
+        duration: 0.5,
+        stagger: 0.05,
+        ease: "power2.in"
+      })
+      // 4. Slide out loader screen
+      .to(loaderScreen, {
+        yPercent: -100,
+        duration: 1.0,
+        ease: "power4.inOut"
+      }, "-=0.1")
+      .to(loaderScreen, {
+        display: "none"
+      });
+
+      // 5. Staggered reveal of hero content
+      tl.from("#hero-section h1", {
+        opacity: 0,
+        y: 60,
+        duration: 1.2,
+        ease: "power4.out"
+      }, "-=0.8")
+      .from("#hero-section p", {
+        opacity: 0,
+        y: 40,
+        duration: 1.0,
+        ease: "power3.out"
+      }, "-=0.95")
+      .from("#hero-section button", {
+        opacity: 0,
+        y: 30,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
+      }, "-=0.8")
+      .from("#main-navbar", {
+        opacity: 0,
+        y: -40,
+        duration: 1.0,
+        ease: "power4.out"
+      }, "-=1.1");
     });
   </script>
 
