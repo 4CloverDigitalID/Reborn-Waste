@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="id" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Reborn Waste</title>
-  <meta name="description" content="Platform edukasi pengolahan sampah, data sampah, dan kalkulator nilai sampah daur ulang.">
-  
+  <meta name="description"
+    content="Platform edukasi pengolahan sampah, data sampah, dan kalkulator nilai sampah daur ulang.">
+
   <!-- CDN Scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
@@ -17,7 +19,9 @@
   <!-- Google Fonts: Inter & Dancing Script -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Dancing+Script:wght@600;700&display=swap"
+    rel="stylesheet">
 
   <style>
     body {
@@ -30,59 +34,65 @@
 
     /* ── Section 1 (Belajar) Styles ── */
     body {
-    font-family: 'Inter', sans-serif;
-  }
-  .card-wrapper {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    cursor: pointer;
-  }
-  .card-img {
-    object-fit: cover;
-    width: 100%;
-    border-radius: 32px;
-  }
-  .lihat-btn {
-    position: absolute;
-    bottom: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: #1e7a56;
-    color: white;
-    border: none;
-    padding: 10px 36px;
-    border-radius: 50px;
-    font-size: 15px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-    white-space: nowrap;
-    z-index: 2;
-  }
-  .card-wrapper:hover .lihat-btn {
-    bottom: 40%;
-  }
-  .card-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(30, 122, 86, 0.35);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    border-radius: 32px;
-  }
-  .card-wrapper:hover .card-overlay {
-    opacity: 1;
-  }
+      font-family: 'Inter', sans-serif;
+    }
+
+    .card-wrapper {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .card-img {
+      object-fit: cover;
+      width: 100%;
+      border-radius: 32px;
+    }
+
+    .lihat-btn {
+      position: absolute;
+      bottom: -60px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e7a56;
+      color: white;
+      border: none;
+      padding: 10px 36px;
+      border-radius: 50px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: bottom 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      white-space: nowrap;
+      z-index: 2;
+    }
+
+    .card-wrapper:hover .lihat-btn {
+      bottom: 40%;
+    }
+
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(30, 122, 86, 0.35);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 32px;
+    }
+
+    .card-wrapper:hover .card-overlay {
+      opacity: 1;
+    }
 
     /* ── Section 2 (Data) Styles ── */
     #data-section {
-  background: linear-gradient(135deg, #d4f5e2 0%, #e8faf0 50%, #c8f0da 100%);
-  border-radius: 20px;
-}
+      background: linear-gradient(135deg, #d4f5e2 0%, #e8faf0 50%, #c8f0da 100%);
+      border-radius: 20px;
+    }
 
 
-    
+
 
     .wrapper {
       width: 100%;
@@ -894,69 +904,133 @@
     body {
       font-family: 'Inter', sans-serif;
     }
+
     .quote-font {
       font-family: 'Dancing Script', cursive;
     }
-    
+
     /* Splatter SVG Animation */
     .splatter-svg {
       animation: float-splatter 20s ease-in-out infinite;
       transform-origin: center;
     }
-    .blob-1, .blob-2, .blob-3, .drop-1, .drop-2, .drop-3 {
+
+    .blob-1,
+    .blob-2,
+    .blob-3,
+    .drop-1,
+    .drop-2,
+    .drop-3 {
       transform-box: fill-box;
       transform-origin: center;
     }
+
     .blob-1 {
       animation: morph-blob-1 12s ease-in-out infinite;
     }
+
     .blob-2 {
       animation: morph-blob-2 15s ease-in-out infinite alternate;
     }
+
     .blob-3 {
       animation: morph-blob-3 18s ease-in-out infinite alternate;
     }
+
     .drop-1 {
       animation: float-drop-1 8s ease-in-out infinite;
     }
+
     .drop-2 {
       animation: float-drop-2 10s ease-in-out infinite;
     }
+
     .drop-3 {
       animation: float-drop-3 9s ease-in-out infinite;
     }
 
     @keyframes float-splatter {
-      0%, 100% {
+
+      0%,
+      100% {
         transform: translate(0, 0) scale(1.1) rotate(0deg);
       }
+
       50% {
         transform: translate(3px, -5px) scale(1.12) rotate(1deg);
       }
     }
+
     @keyframes morph-blob-1 {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.05) rotate(3deg) skewX(2deg); }
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.05) rotate(3deg) skewX(2deg);
+      }
     }
+
     @keyframes morph-blob-2 {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(0.96) rotate(-4deg) skewY(-2deg); }
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(0.96) rotate(-4deg) skewY(-2deg);
+      }
     }
+
     @keyframes morph-blob-3 {
-      0%, 100% { transform: scale(1) rotate(0deg); }
-      50% { transform: scale(1.03) rotate(5deg); }
+
+      0%,
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+
+      50% {
+        transform: scale(1.03) rotate(5deg);
+      }
     }
+
     @keyframes float-drop-1 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-8px, 10px) scale(0.9); }
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-8px, 10px) scale(0.9);
+      }
     }
+
     @keyframes float-drop-2 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(12px, -8px) scale(1.1); }
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(12px, -8px) scale(1.1);
+      }
     }
+
     @keyframes float-drop-3 {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(-6px, -12px) scale(0.95); }
+
+      0%,
+      100% {
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        transform: translate(-6px, -12px) scale(0.95);
+      }
     }
 
     /* ── Navbar Styles ── */
@@ -986,15 +1060,18 @@
       text-decoration: none;
       transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.4s ease;
     }
+
     .nav-logo-pill:hover {
       transform: scale(1.03);
       box-shadow: 0 6px 28px rgba(0, 0, 0, 0.12);
     }
+
     .nav-logo-pill img {
       width: 38px;
       height: 38px;
       border-radius: 50%;
     }
+
     .nav-logo-pill span {
       font-weight: 700;
       font-size: 0.95rem;
@@ -1031,10 +1108,12 @@
       background: transparent;
       cursor: pointer;
     }
+
     .nav-link-btn:hover {
       color: #ffffff;
       background: rgba(255, 255, 255, 0.12);
     }
+
     .nav-link-btn.active {
       background: #0a402a;
       color: #ffffff;
@@ -1046,17 +1125,21 @@
     .main-navbar.on-light-section .nav-logo-pill span {
       color: #1a1a1a;
     }
+
     .main-navbar.on-light-section .nav-link-btn {
       color: rgba(0, 0, 0, 0.7);
     }
+
     .main-navbar.on-light-section .nav-link-btn:hover {
       color: #000000;
       background: rgba(0, 0, 0, 0.06);
     }
+
     .main-navbar.on-light-section .nav-link-btn.active {
       background: #0a402a;
       color: #ffffff;
     }
+
     .main-navbar.on-light-section .nav-hamburger {
       color: #1a1a1a;
     }
@@ -1074,6 +1157,7 @@
       color: white;
       transition: background 0.4s ease, border-color 0.4s ease, color 0.4s ease;
     }
+
     .nav-mobile-menu {
       display: none;
       position: fixed;
@@ -1091,9 +1175,11 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
       min-width: 180px;
     }
+
     .nav-mobile-menu.open {
       display: flex;
     }
+
     .nav-mobile-menu .nav-link-btn {
       text-align: center;
     }
@@ -1102,6 +1188,7 @@
       .nav-links-pill {
         display: none;
       }
+
       .nav-hamburger {
         display: flex;
         align-items: center;
@@ -1126,166 +1213,87 @@
       pointer-events: none;
       opacity: 0;
     }
+
     #belajar-modal.is-open {
       pointer-events: all;
     }
+
     #modal-backdrop {
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.65);
+      background: rgba(0, 0, 0, 0.6);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
     }
+
     #modal-box {
-      position: relative;
-      background: linear-gradient(145deg, #0d5a42, #0a402a);
-      border: 1px solid rgba(190, 254, 227, 0.15);
-      border-radius: 28px;
-      overflow-y: auto;
-      width: 100%;
-      max-width: 580px;
-      max-height: 85vh;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(190,254,227,0.08);
       scrollbar-width: thin;
-      scrollbar-color: rgba(190, 254, 227, 0.3) transparent;
+      scrollbar-color: rgba(0, 0, 0, 0.15) transparent;
     }
+
     #modal-box::-webkit-scrollbar {
       width: 6px;
     }
+
     #modal-box::-webkit-scrollbar-track {
       background: transparent;
     }
+
     #modal-box::-webkit-scrollbar-thumb {
-      background: rgba(190, 254, 227, 0.3);
+      background: rgba(0, 0, 0, 0.15);
       border-radius: 10px;
     }
+
     #modal-box::-webkit-scrollbar-thumb:hover {
-      background: rgba(190, 254, 227, 0.5);
-    }
-    #modal-hero-img {
-      width: 100%;
-      height: 240px;
-      object-fit: cover;
-      display: block;
-    }
-    .modal-body {
-      padding: 28px 32px 32px;
-    }
-    .modal-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(190, 254, 227, 0.12);
-      border: 1px solid rgba(190, 254, 227, 0.25);
-      color: #BEFEE3;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      padding: 5px 14px;
-      border-radius: 50px;
-      margin-bottom: 14px;
-    }
-    .modal-title {
-      font-size: 1.75rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 12px;
-      line-height: 1.2;
-    }
-    .modal-desc {
-      font-size: 0.88rem;
-      color: rgba(255,255,255,0.78);
-      line-height: 1.75;
-      margin-bottom: 20px;
-    }
-    .modal-steps {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .modal-step {
-      display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 12px 16px;
-    }
-    .modal-step-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: #BEFEE3;
-      color: #0a402a;
-      font-size: 0.78rem;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-    .modal-step-text {
-      color: rgba(255,255,255,0.85);
-      font-size: 0.84rem;
-      line-height: 1.55;
-      padding-top: 4px;
-    }
-    #modal-close-btn {
-      position: absolute;
-      top: 16px;
-      right: 16px;
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(6px);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: white;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: background 0.2s ease, transform 0.2s ease;
-      z-index: 10;
-    }
-    #modal-close-btn:hover {
-      background: rgba(255,255,255,0.15);
-      transform: scale(1.1);
+      background: rgba(0, 0, 0, 0.35);
     }
   </style>
 </head>
+
 <body class="min-h-screen flex flex-col justify-start">
 
   <!-- BELAJAR MODAL -->
   <div id="belajar-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title-text" data-lenis-prevent>
     <div id="modal-backdrop"></div>
-    <div id="modal-box">
-      <button id="modal-close-btn" aria-label="Tutup modal">
-        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-          <path d="M1 1L13 13M13 1L1 13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    <div id="modal-box" class="bg-white w-full max-w-2xl rounded-2xl shadow-2xl overflow-y-auto relative max-h-[90vh] mx-4">
+      <!-- Close Button -->
+      <button id="modal-close-btn" aria-label="Tutup modal" class="absolute top-6 right-6 text-gray-400 hover:text-gray-600 transition-colors cursor-pointer z-10">
+        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M6 18L18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
         </svg>
       </button>
-      <img id="modal-hero-img" src="" alt="">
-      <div class="modal-body">
-        <div class="modal-tag" id="modal-tag-text">♻️ Edukasi Sampah</div>
-        <h3 class="modal-title" id="modal-title-text"></h3>
-        <p class="modal-desc" id="modal-desc-text"></p>
-        <div class="modal-steps" id="modal-steps-container"></div>
+      
+      <div class="p-6 sm:p-8 md:p-12">
+        <!-- Header Section -->
+        <section class="text-center mb-8">
+          <!-- Hero Image -->
+          <div class="mb-8 flex justify-center">
+            <div class="relative rounded-xl overflow-hidden shadow-sm max-w-md w-full">
+              <img id="modal-hero-img" alt="Waste Sorting Guide" class="w-full h-auto object-cover max-h-[220px]" src=""/>
+            </div>
+          </div>
+          <p id="modal-tag-text" class="text-xs font-bold tracking-widest text-emerald-600 uppercase mb-2"></p>
+          <h2 id="modal-title-text" class="text-2xl md:text-3xl font-bold text-gray-800 mb-4"></h2>
+          <p id="modal-desc-text" class="text-gray-500 leading-relaxed max-w-lg mx-auto text-sm"></p>
+        </section>
+        
+        <!-- List Items Section -->
+        <section id="modal-steps-container" class="space-y-4">
+          <!-- Dynamic Steps go here -->
+        </section>
       </div>
     </div>
   </div>
 
   <!-- LOADER SCREEN -->
-  <div id="loader-screen" class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0a402a] text-white">
+  <div id="loader-screen"
+    class="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0a402a] text-white">
     <!-- Minimalist Circular Progress Indicator -->
     <div class="relative w-28 h-28 mb-6 flex items-center justify-center">
       <svg class="w-full h-full transform -rotate-90">
         <circle cx="56" cy="56" r="50" class="stroke-[#062c1d]" stroke-width="6" fill="transparent" />
-        <circle id="loader-progress-circle" cx="56" cy="56" r="50" class="stroke-[#BEFEE3]" stroke-width="6" stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" fill="transparent" />
+        <circle id="loader-progress-circle" cx="56" cy="56" r="50" class="stroke-[#BEFEE3]" stroke-width="6"
+          stroke-dasharray="314.16" stroke-dashoffset="314.16" stroke-linecap="round" fill="transparent" />
       </svg>
       <!-- Centered Logo -->
       <div class="absolute inset-0 flex items-center justify-center" id="loader-logo-container">
@@ -1303,723 +1311,758 @@
 
     <!-- Subtitle -->
     <p class="absolute bottom-12 text-emerald-400/60 text-xs tracking-widest uppercase opacity-0" id="loader-subtitle">
-      Menuju Jakarta Hijau & Berkelanjutan
+      Menuju Indonesia Hijau & Berkelanjutan
     </p>
   </div>
 
   <!-- NAVBAR -->
-<nav id="main-navbar" class="main-navbar">
-  <!-- Left: Logo + Name pill -->
-  <a href="#" class="nav-logo-pill" id="navbar-logo">
-    <img src="bagian/img/logo.svg" alt="ReBorn Waste Logo">
-    <span>ReBorn Waste</span>
-  </a>
+  <nav id="main-navbar" class="main-navbar">
+    <!-- Left: Logo + Name pill -->
+    <a href="#" class="nav-logo-pill" id="navbar-logo">
+      <img src="bagian/img/logo.svg" alt="ReBorn Waste Logo">
+      <span>ReBorn Waste</span>
+    </a>
 
-  <!-- Right: Navigation links pill (glassmorphism) -->
-  <div class="nav-links-pill" id="navbar-links">
-    <a href="#About" class="nav-link-btn active" data-section="About">About</a>
-    <a href="#belajar-section" class="nav-link-btn" data-section="belajar-section">Pilah</a>
-    <a href="#data-section" class="nav-link-btn" data-section="data-section">Data</a>
-    <a href="#edukasi-section" class="nav-link-btn" data-section="edukasi-section">Berita</a>
-  </div>
+    <!-- Right: Navigation links pill (glassmorphism) -->
+    <div class="nav-links-pill" id="navbar-links">
+      <a href="#About" class="nav-link-btn active" data-section="About">About</a>
+      <a href="#belajar-section" class="nav-link-btn" data-section="belajar-section">Pilah</a>
+      <a href="#data-section" class="nav-link-btn" data-section="data-section">Data</a>
+      <a href="#edukasi-section" class="nav-link-btn" data-section="edukasi-section">Berita</a>
+    </div>
 
-  <!-- Mobile hamburger -->
-  <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <line x1="3" y1="6" x2="21" y2="6"/>
-      <line x1="3" y1="12" x2="21" y2="12"/>
-      <line x1="3" y1="18" x2="21" y2="18"/>
-    </svg>
-  </button>
+    <!-- Mobile hamburger -->
+    <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle navigation menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+        stroke-linecap="round" stroke-linejoin="round">
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
 
-  <!-- Mobile dropdown menu -->
-  <div class="nav-mobile-menu" id="nav-mobile-menu">
-    <a href="#About" class="nav-link-btn active" data-section="About">About</a>
-    <a href="#belajar-section" class="nav-link-btn" data-section="belajar-section">Pilah</a>
-    <a href="#data-section" class="nav-link-btn" data-section="data-section">Data</a>
-    <a href="#edukasi-section" class="nav-link-btn" data-section="edukasi-section">Berita</a>
-  </div>
-</nav>
+    <!-- Mobile dropdown menu -->
+    <div class="nav-mobile-menu" id="nav-mobile-menu">
+      <a href="#About" class="nav-link-btn active" data-section="About">About</a>
+      <a href="#belajar-section" class="nav-link-btn" data-section="belajar-section">Pilah</a>
+      <a href="#data-section" class="nav-link-btn" data-section="data-section">Data</a>
+      <a href="#edukasi-section" class="nav-link-btn" data-section="edukasi-section">Berita</a>
+    </div>
+  </nav>
 
   <!-- HERO SECTION -->
-<section 
-  id="hero-section" 
-  class="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat -mt-[76px] pt-[76px]"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)); background-attachment: fixed;"
->
-  <video autoplay loop muted playsinline preload="auto" poster="bagian/img/hero.png" class="absolute inset-0 w-full h-full object-cover z-0">
-    <source src="bagian/img/hero_720p.webm" type="video/webm">
-    <source src="bagian/img/hero_720p.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-  </video>
-  <!-- Overlay to darken video for better readability -->
-  <div class="absolute inset-0 bg-black/45 z-5 pointer-events-none"></div>
+  <section id="hero-section"
+    class="relative w-full h-screen min-h-screen flex items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat -mt-[76px] pt-[76px]"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)); background-attachment: fixed;">
+    <video autoplay loop muted playsinline preload="auto" poster="bagian/img/hero.png"
+      class="absolute inset-0 w-full h-full object-cover z-0">
+      <source src="bagian/img/hero_720p.webm" type="video/webm">
+      <source src="bagian/img/hero_720p.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <!-- Overlay to darken video for better readability -->
+    <div class="absolute inset-0 bg-black/45 z-5 pointer-events-none"></div>
 
-  <!-- Content -->
-  <div class="relative z-10 w-full h-full flex flex-col items-center sm:items-start justify-center px-6 sm:ml-5 sm:px-8 md:px-12 pb-20 sm:pb-0">
-    <div class="flex flex-col items-center sm:items-start max-w-3xl">
-      <!-- Heading -->
-      <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6 text-center sm:text-left" style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.65);">
-        Ciptakan Jakarta Bebas <br> Sampah, <span class="text-[#BEFEE3]" style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.7);">Mulai Dari Genggaman Mu</span>
-      </h1>
+    <!-- Content -->
+    <div
+      class="relative z-10 w-full h-full flex flex-col items-center sm:items-start justify-center px-6 sm:ml-5 sm:px-8 md:px-12 pb-20 sm:pb-0">
+      <div class="flex flex-col items-center sm:items-start max-w-3xl">
+        <!-- Heading -->
+        <h1 class="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-tight mb-6 text-center sm:text-left"
+          style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.75), 0 2px 4px rgba(0, 0, 0, 0.65);">
+          Ciptakan Indonesia Bebas <br> Sampah, <span class="text-[#BEFEE3]"
+            style="text-shadow: 0 4px 12px rgba(0, 0, 0, 0.8), 0 2px 4px rgba(0, 0, 0, 0.7);">Mulai Dari Genggaman
+            Mu</span>
+        </h1>
 
-      <!-- Subtitle -->
-      <p class="text-base sm:text-lg md:text-lg text-gray-100 font-light leading-relaxed mb-10 max-w-xl text-center sm:text-left" style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.7);">
-        Platform pintar untuk memonitor, mengelola, dan mengedukasi masyarakat Jakarta dalam mewujudkan ekosistem kota yang berkelanjutan.
-      </p>
+        <!-- Subtitle -->
+        <p class="text-base sm:text-lg md:text-lg text-gray-100 font-light leading-relaxed mb-10 max-w-xl text-center sm:text-left"
+          style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8), 0 1px 3px rgba(0, 0, 0, 0.7);">
+          Platform pintar untuk memonitor, mengelola, dan mengedukasi masyarakat Indonesia dalam mewujudkan ekosistem kota
+          yang berkelanjutan.
+        </p>
 
-      <!-- Buttons -->
-      <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start">
-        <button 
-          class="px-12 py-3 sm:py-3 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap"
-          onclick="document.getElementById('About').scrollIntoView({ behavior: 'smooth' })"
-        >
-          Mulai
-        </button>
+        <!-- Buttons -->
+        <div class="flex flex-col sm:flex-row gap-4 sm:gap-6 items-center sm:items-start">
+          <button
+            class="px-12 py-3 sm:py-3 bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-700 hover:to-emerald-700 text-white font-semibold rounded-2xl transition-all duration-300 transform hover:scale-105 active:scale-95 shadow-lg hover:shadow-xl whitespace-nowrap"
+            onclick="document.getElementById('About').scrollIntoView({ behavior: 'smooth' })">
+            Mulai
+          </button>
 
-        <button 
-          class="px-12 py-3 sm:py-3 border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105 active:scale-95 backdrop-blur-sm whitespace-nowrap"
-          onclick="document.getElementById('belajar-section').scrollIntoView({ behavior: 'smooth' })"
-        >
-          Jelajahi
-        </button>
+          <button
+            class="px-12 py-3 sm:py-3 border-2 border-white text-white font-semibold rounded-2xl hover:bg-white/10 transition-all duration-300 transform hover:scale-105 active:scale-95 backdrop-blur-sm whitespace-nowrap"
+            onclick="document.getElementById('belajar-section').scrollIntoView({ behavior: 'smooth' })">
+            Jelajahi
+          </button>
+        </div>
       </div>
     </div>
-  </div>
 
-  <!-- Scroll Indicator - Hidden di Mobile -->
-  <div class="hidden md:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
-    <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-    </svg>
-  </div>
-</section>
-
+    <!-- Scroll Indicator - Hidden di Mobile -->
+    <div class="hidden md:flex absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce z-20">
+      <svg class="w-6 h-6 text-white opacity-70" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+      </svg>
+    </div>
+  </section>
 
 
-<!-- ABOUT SECTION -->
-<section id="About" class="w-full bg-[#1a6f4a] py-16 md:py-24 px-6 md:px-12">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
-      
-      <!-- Left Content: Visi Misi Kami -->
-      <div class="flex flex-col justify-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-          Visi Misi Kami
+
+  <!-- ABOUT SECTION -->
+  <section id="About" class="w-full bg-[#1a6f4a] py-16 md:py-24 px-6 md:px-12">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-12 items-center">
+
+        <!-- Left Content: Visi Misi Kami -->
+        <div class="flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Visi Misi Kami
+          </h2>
+          <p class="text-gray-100 text-xs md:text-sm leading-relaxed font-light">
+            Visi dan Misi ReBorn Waste adalah menjadi platform edukasi digital yang inovatif dan interaktif dalam
+            meningkatkan kesadaran masyarakat terhadap pengelolaan sampah yang berkelanjutan, dengan cara mengedukasi,
+            pentingnya pemilahan sejak dari sumbernya, menyajikan informasi proses pengelolaan sampah secara visual dan
+            mudah dipahami, meningkatkan pemahaman manfaat dari ulang dan ekonomi sirkuler, mendorong partisipasi aktif
+            masyarakat dalam pengelolaan limbah yang bertanggung jawab, serta mewujudkan terciptanya lingkungan yang
+            lebih bersih, hijau, dan berkelanjutan bagi generasi mendatang.
+          </p>
+        </div>
+
+        <!-- Center Content: Image with Decoration -->
+        <div class="flex justify-center">
+          <!-- Main Image Container (relative untuk daun) -->
+          <div class="w-full max-w-xs relative">
+            <img src="./bagian/img/About.png" alt="Tangan memegang bumi"
+              class="w-full h-auto rounded-3xl object-cover shadow-2xl">
+
+            <!-- Leaf Decoration (absolute ke image container) -->
+            <div class="absolute -top-6 -right-6 w-28 h-28 md:w-32 md:h-32 md:-top-14 z-20">
+              <img src="./bagian/img/Add-about.png" alt="Daun decoration" class="w-full h-full object-contain">
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Content: Tentang Kami -->
+        <div class="flex flex-col justify-center">
+          <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
+            Tentang Kami
+          </h2>
+          <p class="text-gray-100 text-xs md:text-sm leading-relaxed font-light">
+            ReBorn Waste adalah platform edukasi digital interaktif yang membantu masyarakat memahami perjalanan sampah
+            dari proses pembangunan, pemilahan, pengolahan, hingga menjadi produk yang bermanfaat. Dengan pendekatan
+            visual yang menarik dan mudah dipahami, ReBorn Waste hadir untuk meningkatkan kesadaran lingkungan serta
+            mendorong penerapan pengolahan sampah yang bertanggung jawab, sehingga setiap orang dapat berkontribusi
+            dalam menciptakan lingkungan yang lebih bersih, hijau, dan berkelanjutan melalui konsep ekonomi sirkuler.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KEUNGGULAN SECTION -->
+  <section id="keunggulan-section" class="w-full bg-[#1a6f4a] py-13 md:py-18 px-6 md:px-12">
+    <div class="max-w-6xl mx-auto">
+      <!-- Header -->
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+          Apa Keunggulan Aplikasi Kami?
         </h2>
-        <p class="text-gray-100 text-xs md:text-sm leading-relaxed font-light">
-          Visi dan Misi ReBorn Waste adalah menjadi platform edukasi digital yang inovatif dan interaktif dalam meningkatkan kesadaran masyarakat terhadap pengelolaan sampah yang berkelanjutan, dengan cara mengedukasi, pentingnya pemilahan sejak dari sumbernya, menyajikan informasi proses pengelolaan sampah secara visual dan mudah dipahami, meningkatkan pemahaman manfaat dari ulang dan ekonomi sirkuler, mendorong partisipasi aktif masyarakat dalam pengelolaan limbah yang bertanggung jawab, serta mewujudkan terciptanya lingkungan yang lebih bersih, hijau, dan berkelanjutan bagi generasi mendatang.
+        <p class="text-gray-100 text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-light">
+          Kami menghadirkan cara belajar yang lebih menarik melalui visualisasi, simulasi, dan informasi yang mudah
+          dipahami untuk membantu masyarakat memahami perjalanan sampah dari awal hingga menjadi sesuatu yang bernilai.
         </p>
       </div>
 
-      <!-- Center Content: Image with Decoration -->
-      <div class="flex justify-center">
-        <!-- Main Image Container (relative untuk daun) -->
-        <div class="w-full max-w-xs relative">
-          <img 
-            src="./bagian/img/About.png" 
-            alt="Tangan memegang bumi" 
-            class="w-full h-auto rounded-3xl object-cover shadow-2xl"
-          >
-          
-          <!-- Leaf Decoration (absolute ke image container) -->
-          <div class="absolute -top-6 -right-6 w-28 h-28 md:w-32 md:h-32 md:-top-14 z-20">
-            <img 
-              src="./bagian/img/Add-about.png" 
-              alt="Daun decoration" 
-              class="w-full h-full object-contain"
-            >
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+
+        <!-- Card 1: Edukasi -->
+        <div class="group cursor-pointer">
+          <div
+            class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold text-white mb-4 mt-4">
+              Edukasi
+            </h3>
+            <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
+              Kami menghadirkan cara belajar yang lebih menarik melalui visualisasi, simulasi, dan informasi yang mudah
+              dipahami untuk membantu masyarakat memahami perjalanan sampah dari awal hingga menjadi sesuatu yang
+              bernilai.
+            </p>
+
+            <!-- Image Container - Fixed Height -->
+            <div
+              class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <img src="./bagian/img/Edukasi.png" alt="Edukasi" class="h-full object-contain">
+            </div>
           </div>
         </div>
-      </div>
 
-      <!-- Right Content: Tentang Kami -->
-      <div class="flex flex-col justify-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
-          Tentang Kami
-        </h2>
-        <p class="text-gray-100 text-xs md:text-sm leading-relaxed font-light">
-          ReBorn Waste adalah platform edukasi digital interaktif yang membantu masyarakat memahami perjalanan sampah dari proses pembangunan, pemilahan, pengolahan, hingga menjadi produk yang bermanfaat. Dengan pendekatan visual yang menarik dan mudah dipahami, ReBorn Waste hadir untuk meningkatkan kesadaran lingkungan serta mendorong penerapan pengolahan sampah yang bertanggung jawab, sehingga setiap orang dapat berkontribusi dalam menciptakan lingkungan yang lebih bersih, hijau, dan berkelanjutan melalui konsep ekonomi sirkuler.
-        </p>
-      </div>
+        <!-- Card 2: Interaktif -->
+        <div class="group cursor-pointer">
+          <div
+            class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold text-white mb-4 mt-4">
+              Interaktif
+            </h3>
+            <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
+              Belajar pengelolaan sampah menjadi lebih menarik melalui simulasi dan visualisasi yang menghibur dan
+              pengguna dapat memahami setiap proses secara langsung.
+            </p>
 
+            <!-- Image Container - Fixed Height -->
+            <div
+              class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <img src="./bagian/img/Interaktif.png" alt="Interaktif" class="h-full object-contain">
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Solutif -->
+        <div class="group cursor-pointer">
+          <div
+            class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
+            <h3 class="text-2xl font-bold text-white mb-4 mt-5">
+              Solutif
+            </h3>
+            <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
+              Website ini menyajikan edukasi sampah secara interaktif dan mudah dipahami, memberikan pengguna biasa
+              langsung melihat dan memahami proses pengelolaan sampah dari awal hingga akhir.
+            </p>
+
+            <!-- Image Container - Fixed Height -->
+            <div
+              class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <img src="./bagian/img/Solutif.png" alt="Solutif" class="h-full object-contain">
+            </div>
+          </div>
+        </div>
+
+      </div>
     </div>
-  </div>
-</section>
-
-<!-- KEUNGGULAN SECTION -->
-<section id="keunggulan-section" class="w-full bg-[#1a6f4a] py-13 md:py-18 px-6 md:px-12">
-  <div class="max-w-6xl mx-auto">
-    <!-- Header -->
-    <div class="text-center mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
-        Apa Keunggulan Aplikasi Kami?
-      </h2>
-      <p class="text-gray-100 text-sm md:text-base leading-relaxed max-w-2xl mx-auto font-light">
-        Kami menghadirkan cara belajar yang lebih menarik melalui visualisasi, simulasi, dan informasi yang mudah dipahami untuk membantu masyarakat memahami perjalanan sampah dari awal hingga menjadi sesuatu yang bernilai.
-      </p>
-    </div>
-
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-      
-      <!-- Card 1: Edukasi -->
-      <div class="group cursor-pointer">
-        <div class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
-          <h3 class="text-2xl font-bold text-white mb-4 mt-4">
-            Edukasi
-          </h3>
-          <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
-            Kami menghadirkan cara belajar yang lebih menarik melalui visualisasi, simulasi, dan informasi yang mudah dipahami untuk membantu masyarakat memahami perjalanan sampah dari awal hingga menjadi sesuatu yang bernilai.
-          </p>
-          
-          <!-- Image Container - Fixed Height -->
-          <div class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-            <img 
-              src="./bagian/img/Edukasi.png" 
-              alt="Edukasi" 
-              class="h-full object-contain"
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 2: Interaktif -->
-      <div class="group cursor-pointer">
-        <div class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
-          <h3 class="text-2xl font-bold text-white mb-4 mt-4">
-            Interaktif
-          </h3>
-          <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
-            Belajar pengelolaan sampah menjadi lebih menarik melalui simulasi dan visualisasi yang menghibur dan pengguna dapat memahami setiap proses secara langsung.
-          </p>
-          
-          <!-- Image Container - Fixed Height -->
-          <div class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-            <img 
-              src="./bagian/img/Interaktif.png" 
-              alt="Interaktif" 
-              class="h-full object-contain"
-            >
-          </div>
-        </div>
-      </div>
-
-      <!-- Card 3: Solutif -->
-      <div class="group cursor-pointer">
-        <div class="bg-[#0d5a42] rounded-3xl p-8 h-full flex flex-col transition-all duration-300 ease-out transform group-hover:scale-105 group-hover:shadow-2xl group-hover:-translate-y-2">
-          <h3 class="text-2xl font-bold text-white mb-4 mt-5">
-            Solutif
-          </h3>
-          <p class="text-gray-100 text-sm leading-relaxed mb-3 font-light flex-grow">
-            Website ini menyajikan edukasi sampah secara interaktif dan mudah dipahami, memberikan pengguna biasa langsung melihat dan memahami proses pengelolaan sampah dari awal hingga akhir.
-          </p>
-          
-          <!-- Image Container - Fixed Height -->
-          <div class="overflow-hidden rounded-2xl  h-24 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-            <img 
-              src="./bagian/img/Solutif.png" 
-              alt="Solutif" 
-              class="h-full object-contain"
-            >
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
+  </section>
 
 
   <!-- SECTION 1: BELAJAR -->
   <section id="belajar-section" class="w-full bg-[#1a6f4a] py-16 px-6 md:px-12 flex flex-col items-center">
     <div class="flex flex-col items-center w-full max-w-5xl">
-    <h1 class="text-2xl sm:text-3xl lg:text-[40px] font-bold text-white text-center leading-tight">
-      Belajar Proses Pengolahan Sampah
-    </h1>
-    <p class="text-white text-sm font-light text-center mt-4 max-w-[487px]">
-      Belajar tentang bagaimana cara sampah dibuang dari awal sampai menjadi produk dengan hasil nyata.
-    </p>
-  </div>
-
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full max-w-5xl">
-
-    <div class="flex flex-col w-full">
-      <div class="card-wrapper">
-        <img src="bagian/img/Rectangle 14.webp" alt="" class="card-img h-[358px]">
-        <div class="card-overlay"></div>
-        <button class="lihat-btn" data-modal="pembuangan">Lihat</button>
-      </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Pembuangan</h2>
-      <p class="text-white text-sm font-light mt-2">
-        Pilahlah sampah sesuai jenisnya agar dapat dikelola dengan lebih baik dan tidak mencemari lingkungan.
+      <h1 class="text-2xl sm:text-3xl lg:text-[40px] font-bold text-white text-center leading-tight">
+        Belajar Proses Pengolahan Sampah
+      </h1>
+      <p class="text-white text-sm font-light text-center mt-4 max-w-[487px]">
+        Belajar tentang bagaimana cara sampah dibuang dari awal sampai menjadi produk dengan hasil nyata.
       </p>
     </div>
 
-    <div class="flex flex-col w-full">
-      <div class="card-wrapper">
-        <img src="bagian/img/Rectangle 15.jpeg" alt="" class="card-img h-[280px]">
-        <div class="card-overlay"></div>
-        <button class="lihat-btn" data-modal="pengolahan">Lihat</button>
-      </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Proses Pengolahan</h2>
-      <p class="text-white text-sm font-light mt-2">
-        Pelajari bagaimana sampah diproses setelah dikumpulkan hingga siap untuk didaur ulang atau dimanfaatkan kembali.
-      </p>
-    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-8 w-full max-w-5xl">
 
-    <div class="flex flex-col w-full sm:col-span-2 lg:col-span-1">
-      <div class="card-wrapper">
-        <img src="bagian/img/Rectangle 16.webp" alt="" class="card-img h-[202px]">
-        <div class="card-overlay"></div>
-        <button class="lihat-btn" data-modal="produk">Lihat</button>
+      <div class="flex flex-col w-full">
+        <div class="card-wrapper">
+          <img src="bagian/img/Rectangle 14.webp" alt="" class="card-img h-[358px]">
+          <div class="card-overlay"></div>
+          <button class="lihat-btn" data-modal="pembuangan">Lihat</button>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Pembuangan</h2>
+        <p class="text-white text-sm font-light mt-2">
+          Pilahlah sampah sesuai jenisnya agar dapat dikelola dengan lebih baik dan tidak mencemari lingkungan.
+        </p>
       </div>
-      <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Hasil Produk</h2>
-      <p class="text-white text-sm font-light mt-2">
-        Lihat bagaimana sampah yang diolah dapat berubah menjadi produk baru yang bermanfaat dan bernilai guna.
-      </p>
-    </div>
 
-  </div>
+      <div class="flex flex-col w-full">
+        <div class="card-wrapper">
+          <img src="bagian/img/Rectangle 15.jpeg" alt="" class="card-img h-[280px]">
+          <div class="card-overlay"></div>
+          <button class="lihat-btn" data-modal="pengolahan">Lihat</button>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Proses Pengolahan</h2>
+        <p class="text-white text-sm font-light mt-2">
+          Pelajari bagaimana sampah diproses setelah dikumpulkan hingga siap untuk didaur ulang atau dimanfaatkan
+          kembali.
+        </p>
+      </div>
+
+      <div class="flex flex-col w-full sm:col-span-2 lg:col-span-1">
+        <div class="card-wrapper">
+          <img src="bagian/img/Rectangle 16.webp" alt="" class="card-img h-[202px]">
+          <div class="card-overlay"></div>
+          <button class="lihat-btn" data-modal="produk">Lihat</button>
+        </div>
+        <h2 class="text-xl sm:text-2xl font-bold text-white mt-4">Hasil Produk</h2>
+        <p class="text-white text-sm font-light mt-2">
+          Lihat bagaimana sampah yang diolah dapat berubah menjadi produk baru yang bermanfaat dan bernilai guna.
+        </p>
+      </div>
+
+    </div>
   </section>
 
 
-  
+
   <!-- SECTION 2: DATA -->
-  <section id="data-section" class="w-full min-h-screen py-16 px-6 md:px-12 flex flex-col items-center justify-center relative overflow-hidden">
+  <section id="data-section"
+    class="w-full min-h-screen py-16 px-6 md:px-12 flex flex-col items-center justify-center relative overflow-hidden">
     <div class="wrapper">
 
-    <!-- Header -->
-    <div class="header">
-      <h1>Data dan Fakta Sampah</h1>
-      <p>Yuk, kenali fakta menarik tentang sampah dan dampaknya bagi lingkungan<br>melalui data dan visualisasi berikut.
-      </p>
-    </div>
+      <!-- Header -->
+      <div class="header">
+        <h1>Data dan Fakta Sampah</h1>
+        <p>Yuk, kenali fakta menarik tentang sampah dan dampaknya bagi lingkungan<br>melalui data dan visualisasi
+          berikut.
+        </p>
+      </div>
 
-    <!-- Carousel -->
-    <div class="carousel-shell">
-      <button class="nav-arrow left" id="btnPrev" aria-label="Previous">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-          stroke-linejoin="round">
-          <polyline points="15 18 9 12 15 6"></polyline>
-        </svg>
-      </button>
-      <button class="nav-arrow right" id="btnNext" aria-label="Next">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
-          stroke-linejoin="round">
-          <polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </button>
+      <!-- Carousel -->
+      <div class="carousel-shell">
+        <button class="nav-arrow left" id="btnPrev" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+        </button>
+        <button class="nav-arrow right" id="btnNext" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+            stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </button>
 
-      <div class="card">
-        <div class="slide-track go-left" id="slideTrack">
+        <div class="card">
+          <div class="slide-track go-left" id="slideTrack">
 
-          <!-- ══ SLIDE 1 : Donut ══ -->
-          <div class="slide active">
-            <div class="chart-container">
-              <canvas id="donutChart"></canvas>
-              <div class="chart-center-icon">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                  stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"></path>
-                  <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"></path>
-                  <path d="m14 16-3 3 3 3"></path>
-                  <path d="M8.293 13.596 7.196 9.5 3.1 10.598"></path>
-                  <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843">
-                  </path>
-                  <path d="m13.378 9.633 4.096 1.098 1.097-4.096"></path>
-                </svg>
+            <!-- ══ SLIDE 1 : Donut ══ -->
+            <div class="slide active">
+              <div class="chart-container">
+                <canvas id="donutChart"></canvas>
+                <div class="chart-center-icon">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                    stroke="#ffffff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M7 19H4.815a1.83 1.83 0 0 1-1.57-.881 1.785 1.785 0 0 1-.004-1.784L7.196 9.5"></path>
+                    <path d="M11 19h8.203a1.83 1.83 0 0 0 1.556-.89 1.784 1.784 0 0 0 0-1.775l-1.226-2.12"></path>
+                    <path d="m14 16-3 3 3 3"></path>
+                    <path d="M8.293 13.596 7.196 9.5 3.1 10.598"></path>
+                    <path d="m9.344 5.811 1.093-1.892A1.83 1.83 0 0 1 11.985 3a1.784 1.784 0 0 1 1.546.888l3.943 6.843">
+                    </path>
+                    <path d="m13.378 9.633 4.096 1.098 1.097-4.096"></path>
+                  </svg>
+                </div>
+              </div>
+
+              <div class="info-panel">
+                <div class="legend">
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#1a5c3a"></div><span class="legend-label">Organik -
+                      <strong>60%</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#2d9e5f"></div><span class="legend-label">Plastik -
+                      <strong>20%</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#7dd4a8"></div><span class="legend-label">Kertas -
+                      <strong>10%</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#00e8a0"></div><span class="legend-label">Lainnya -
+                      <strong>10%</strong></span>
+                  </div>
+                </div>
+                <hr class="divider">
+                <p class="desc-title">Data Komposisi Sampah</p>
+                <p class="desc-subtitle">Persentase jenis sampah rumah tangga</p>
+                <p class="desc-text">Sampah organik merupakan jenis sampah yang paling banyak dihasilkan rumah tangga.
+                  Oleh karena itu, pemilahan sejak dari sumber menjadi langkah penting agar sampah dapat diolah secara
+                  lebih efektif.</p>
               </div>
             </div>
 
-            <div class="info-panel">
-              <div class="legend">
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#1a5c3a"></div><span class="legend-label">Organik -
-                    <strong>60%</strong></span>
+            <!-- ══ SLIDE 2 : Horizontal Bars ══ -->
+            <div class="slide">
+              <!-- Bar chart -->
+              <div class="bars-section" id="barsSection">
+
+                <div class="bar-row">
+                  <div class="bar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                      <path d="M12 22V9" />
+                    </svg>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill" data-width="28%" style="background:#00e8a0"></div>
+                  </div>
                 </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#2d9e5f"></div><span class="legend-label">Plastik -
-                    <strong>20%</strong></span>
+
+                <div class="bar-row">
+                  <div class="bar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <rect x="5" y="2" width="14" height="20" rx="2" />
+                      <path d="M9 7h6M9 11h6M9 15h4" />
+                    </svg>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill" data-width="40%" style="background:#00d490"></div>
+                  </div>
                 </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#7dd4a8"></div><span class="legend-label">Kertas -
-                    <strong>10%</strong></span>
+
+                <div class="bar-row">
+                  <div class="bar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M7 3h10v18H7z" rx="2" />
+                      <path d="M7 7h10M7 17h10" />
+                      <ellipse cx="12" cy="3" rx="5" ry="1.5" />
+                      <ellipse cx="12" cy="21" rx="5" ry="1.5" />
+                    </svg>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill" data-width="62%" style="background:#1dbe7a"></div>
+                  </div>
                 </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#00e8a0"></div><span class="legend-label">Lainnya -
-                    <strong>10%</strong></span>
+
+                <div class="bar-row">
+                  <div class="bar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M9 3h6v3l2 3v11a1 1 0 01-1 1H8a1 1 0 01-1-1V9l2-3V3z" />
+                      <path d="M9 3h6" />
+                    </svg>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill" data-width="80%" style="background:#1a9960"></div>
+                  </div>
+                </div>
+
+                <div class="bar-row">
+                  <div class="bar-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
+                      stroke-linejoin="round">
+                      <path d="M8 2l-2 10h12L16 2H8z" />
+                      <path d="M6 12v8a2 2 0 002 2h8a2 2 0 002-2v-8" />
+                      <path d="M9 16h6" />
+                    </svg>
+                  </div>
+                  <div class="bar-track">
+                    <div class="bar-fill" data-width="96%" style="background:#1a5c3a"></div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Info panel -->
+              <div class="info-panel">
+                <div class="legend">
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#00e8a0"></div><span class="legend-label">Organik -
+                      <strong>1 – 6 Bulan</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#00d490"></div><span class="legend-label">Kertas -
+                      <strong>2
+                        – 5 Bulan</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#1dbe7a"></div><span class="legend-label">Kaleng -
+                      <strong>50 – 100 Tahun</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#1a9960"></div><span class="legend-label">Plastik -
+                      <strong>100 – 500 Tahun</strong></span>
+                  </div>
+                  <div class="legend-item">
+                    <div class="legend-dot" style="background:#1a5c3a"></div><span class="legend-label">Kaca -
+                      <strong>Hingga Ribuan Tahun</strong></span>
+                  </div>
+                </div>
+                <hr class="divider">
+                <p class="desc-title">Waktu Terurai Sampah</p>
+                <p class="desc-subtitle">Perkiraan waktu terurai oleh alam</p>
+                <p class="desc-text">Setiap jenis sampah memiliki waktu terurai yang berbeda. Sampah anorganik seperti
+                  plastik dan kaca membutuhkan waktu yang sangat lama untuk terurai, sehingga perlu dikelola dan didaur
+                  ulang dengan baik untuk mengurangi dampak lingkungan.</p>
+              </div>
+            </div>
+
+            <!-- ══ SLIDE 3 : Kompos & Recycling ══ -->
+            <div class="slide">
+              <div class="slide-3-left">
+                <div class="kompos-image" id="categoryImage">
+                  <img src="bagian/img/Rectangle 26-2.svg" class="cat-img active" data-cat="organik" alt="Kompos">
+                  <img src="bagian/img/Rectangle 26-1.svg" class="cat-img" data-cat="kertas" alt="Kertas Daur Ulang">
+                  <img src="bagian/img/Rectangle 26-3.svg" class="cat-img" data-cat="plastik" alt="Plastik Daur Ulang">
+                  <img src="bagian/img/Rectangle 26.svg" class="cat-img" data-cat="kaca" alt="Kaca Daur Ulang">
+                  <span class="category-label">Kompos</span>
+                </div>
+
+                <div class="slide-3-info">
+                  <p class="desc-title">Hasil Daur Ulang</p>
+                  <p class="desc-subtitle">Sampah dapat diolah menjadi produk baru</p>
+                  <p class="desc-text">Sampah yang dikumpulkan dengan baik dapat diolah menjadi berbagai produk yang
+                    bermanfaat. Hal ini menunjukkan bahwa sampah masih memiliki nilai guna dan dapat menjadi sumber daya
+                    yang berharga untuk ekonomi sirkular dan keberlanjutan lingkungan.</p>
                 </div>
               </div>
-              <hr class="divider">
-              <p class="desc-title">Data Komposisi Sampah</p>
-              <p class="desc-subtitle">Persentase jenis sampah rumah tangga</p>
-              <p class="desc-text">Sampah organik merupakan jenis sampah yang paling banyak dihasilkan rumah tangga.
-                Oleh karena itu, pemilahan sejak dari sumber menjadi langkah penting agar sampah dapat diolah secara
-                lebih efektif.</p>
-            </div>
-          </div>
 
-          <!-- ══ SLIDE 2 : Horizontal Bars ══ -->
-          <div class="slide">
-            <!-- Bar chart -->
-            <div class="bars-section" id="barsSection">
-
-              <div class="bar-row">
-                <div class="bar-icon">
+              <div class="category-buttons">
+                <button class="category-btn active" data-category="organik">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                     <path d="M12 22V9" />
                   </svg>
-                </div>
-                <div class="bar-track">
-                  <div class="bar-fill" data-width="28%" style="background:#00e8a0"></div>
-                </div>
-              </div>
-
-              <div class="bar-row">
-                <div class="bar-icon">
+                  <span>Organik</span>
+                </button>
+                <button class="category-btn" data-category="kertas">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
                     stroke-linejoin="round">
                     <rect x="5" y="2" width="14" height="20" rx="2" />
                     <path d="M9 7h6M9 11h6M9 15h4" />
                   </svg>
-                </div>
-                <div class="bar-track">
-                  <div class="bar-fill" data-width="40%" style="background:#00d490"></div>
-                </div>
-              </div>
-
-              <div class="bar-row">
-                <div class="bar-icon">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
-                    stroke-linejoin="round">
-                    <path d="M7 3h10v18H7z" rx="2" />
-                    <path d="M7 7h10M7 17h10" />
-                    <ellipse cx="12" cy="3" rx="5" ry="1.5" />
-                    <ellipse cx="12" cy="21" rx="5" ry="1.5" />
-                  </svg>
-                </div>
-                <div class="bar-track">
-                  <div class="bar-fill" data-width="62%" style="background:#1dbe7a"></div>
-                </div>
-              </div>
-
-              <div class="bar-row">
-                <div class="bar-icon">
+                  <span>Kertas</span>
+                </button>
+                <button class="category-btn" data-category="plastik">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M9 3h6v3l2 3v11a1 1 0 01-1 1H8a1 1 0 01-1-1V9l2-3V3z" />
                     <path d="M9 3h6" />
                   </svg>
-                </div>
-                <div class="bar-track">
-                  <div class="bar-fill" data-width="80%" style="background:#1a9960"></div>
-                </div>
-              </div>
-
-              <div class="bar-row">
-                <div class="bar-icon">
+                  <span>Plastik</span>
+                </button>
+                <button class="category-btn" data-category="kaca">
                   <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
                     stroke-linejoin="round">
                     <path d="M8 2l-2 10h12L16 2H8z" />
                     <path d="M6 12v8a2 2 0 002 2h8a2 2 0 002-2v-8" />
                     <path d="M9 16h6" />
                   </svg>
-                </div>
-                <div class="bar-track">
-                  <div class="bar-fill" data-width="96%" style="background:#1a5c3a"></div>
-                </div>
-              </div>
-
-            </div>
-
-            <!-- Info panel -->
-            <div class="info-panel">
-              <div class="legend">
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#00e8a0"></div><span class="legend-label">Organik -
-                    <strong>1 – 6 Bulan</strong></span>
-                </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#00d490"></div><span class="legend-label">Kertas - <strong>2
-                      – 5 Bulan</strong></span>
-                </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#1dbe7a"></div><span class="legend-label">Kaleng -
-                    <strong>50 – 100 Tahun</strong></span>
-                </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#1a9960"></div><span class="legend-label">Plastik -
-                    <strong>100 – 500 Tahun</strong></span>
-                </div>
-                <div class="legend-item">
-                  <div class="legend-dot" style="background:#1a5c3a"></div><span class="legend-label">Kaca -
-                    <strong>Hingga Ribuan Tahun</strong></span>
-                </div>
-              </div>
-              <hr class="divider">
-              <p class="desc-title">Waktu Terurai Sampah</p>
-              <p class="desc-subtitle">Perkiraan waktu terurai oleh alam</p>
-              <p class="desc-text">Setiap jenis sampah memiliki waktu terurai yang berbeda. Sampah anorganik seperti
-                plastik dan kaca membutuhkan waktu yang sangat lama untuk terurai, sehingga perlu dikelola dan didaur
-                ulang dengan baik untuk mengurangi dampak lingkungan.</p>
-            </div>
-          </div>
-
-          <!-- ══ SLIDE 3 : Kompos & Recycling ══ -->
-          <div class="slide">
-            <div class="slide-3-left">
-              <div class="kompos-image" id="categoryImage">
-                <img src="bagian/img/Rectangle 26-2.svg" class="cat-img active" data-cat="organik" alt="Kompos">
-                <img src="bagian/img/Rectangle 26-1.svg" class="cat-img" data-cat="kertas" alt="Kertas Daur Ulang">
-                <img src="bagian/img/Rectangle 26-3.svg" class="cat-img" data-cat="plastik" alt="Plastik Daur Ulang">
-                <img src="bagian/img/Rectangle 26.svg" class="cat-img" data-cat="kaca" alt="Kaca Daur Ulang">
-                <span class="category-label">Kompos</span>
-              </div>
-
-              <div class="slide-3-info">
-                <p class="desc-title">Hasil Daur Ulang</p>
-                <p class="desc-subtitle">Sampah dapat diolah menjadi produk baru</p>
-                <p class="desc-text">Sampah yang dikumpulkan dengan baik dapat diolah menjadi berbagai produk yang
-                  bermanfaat. Hal ini menunjukkan bahwa sampah masih memiliki nilai guna dan dapat menjadi sumber daya
-                  yang berharga untuk ekonomi sirkular dan keberlanjutan lingkungan.</p>
+                  <span>Kaca</span>
+                </button>
               </div>
             </div>
 
-            <div class="category-buttons">
-              <button class="category-btn active" data-category="organik">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-                  <path d="M12 22V9" />
-                </svg>
-                <span>Organik</span>
-              </button>
-              <button class="category-btn" data-category="kertas">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <rect x="5" y="2" width="14" height="20" rx="2" />
-                  <path d="M9 7h6M9 11h6M9 15h4" />
-                </svg>
-                <span>Kertas</span>
-              </button>
-              <button class="category-btn" data-category="plastik">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="M9 3h6v3l2 3v11a1 1 0 01-1 1H8a1 1 0 01-1-1V9l2-3V3z" />
-                  <path d="M9 3h6" />
-                </svg>
-                <span>Plastik</span>
-              </button>
-              <button class="category-btn" data-category="kaca">
-                <svg viewBox="0 0 24 24" fill="none" stroke="#2d9e5f" stroke-width="1.8" stroke-linecap="round"
-                  stroke-linejoin="round">
-                  <path d="M8 2l-2 10h12L16 2H8z" />
-                  <path d="M6 12v8a2 2 0 002 2h8a2 2 0 002-2v-8" />
-                  <path d="M9 16h6" />
-                </svg>
-                <span>Kaca</span>
-              </button>
-            </div>
-          </div>
-
-        </div><!-- /slide-track -->
-      </div><!-- /card -->
-    </div><!-- /carousel-shell -->
-  </div>
+          </div><!-- /slide-track -->
+        </div><!-- /card -->
+      </div><!-- /carousel-shell -->
+    </div>
 
 
   </section>
 
 
-  
+
   <!-- SECTION 3: EDUKASI -->
-  <section id="edukasi-section" class="w-full bg-[#1a6f4a] py-16 px-6 md:px-12 flex flex-col items-center justify-start">
+  <section id="edukasi-section"
+    class="w-full bg-[#1a6f4a] py-16 px-6 md:px-12 flex flex-col items-center justify-start">
     <div class="w-full max-w-5xl flex flex-col items-center">
       <h1 class="sr-only">Edukasi Vidio Seputar Sampah - Reborn Waste</h1>
 
-    <header class="w-full rounded-[24px] overflow-hidden shadow-2xl mb-10 transition-transform duration-500 hover:scale-[1.01] bg-emerald-800/20">
-      <img src="bagian/img/Berita%20Terkini%20(1)%201.png" alt="Banner Edukasi Vidio Seputar Sampah - Reborn Waste" class="w-full h-auto object-cover block">
-    </header>
+      <header
+        class="w-full rounded-[24px] overflow-hidden shadow-2xl mb-10 transition-transform duration-500 hover:scale-[1.01] bg-emerald-800/20">
+        <img src="bagian/img/Berita%20Terkini%20(1)%201.png" alt="Banner Edukasi Vidio Seputar Sampah - Reborn Waste"
+          class="w-full h-auto object-cover block">
+      </header>
 
-    <section class="w-full">
-      <h2 class="sr-only">Daftar Video Edukasi</h2>
-      <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
-      </div>
-    </section>
+      <section class="w-full">
+        <h2 class="sr-only">Daftar Video Edukasi</h2>
+        <div id="video-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 w-full">
+        </div>
+      </section>
     </div>
   </section>
 
 
-  
+
   <!-- SECTION 4: KALKULATOR -->
-  <section id="kalkulator-section" class="w-full bg-[#1a6f4a] py-16 px-6 flex flex-col items-center justify-start relative overflow-x-hidden">
+  <section id="kalkulator-section"
+    class="w-full bg-[#1a6f4a] py-16 px-6 flex flex-col items-center justify-start relative overflow-x-hidden">
     <div class="w-full max-w-[540px] flex flex-col items-center gap-10">
       <!-- Title & Description Header -->
-    <header class="text-center text-white max-w-md z-10">
-      <h1 class="text-3xl sm:text-[40px] font-extrabold tracking-tight leading-tight mb-3">
-        Kalkulator Harga Sampah
-      </h1>
-      <p class="text-xs sm:text-sm text-emerald-200/75 font-light leading-relaxed">
-        Ketahui harga sampah yang dapat dijual dan buat lingkungan menjadi lebih bersih
-      </p>
-    </header>
+      <header class="text-center text-white max-w-md z-10">
+        <h1 class="text-3xl sm:text-[40px] font-extrabold tracking-tight leading-tight mb-3">
+          Kalkulator Harga Sampah
+        </h1>
+        <p class="text-xs sm:text-sm text-emerald-200/75 font-light leading-relaxed">
+          Ketahui harga sampah yang dapat dijual dan buat lingkungan menjadi lebih bersih
+        </p>
+      </header>
 
-    <!-- Calculator Card Section -->
-    <section class="relative w-full bg-gradient-to-br from-[#0c804f]/35 to-[#075936]/35 backdrop-blur-md rounded-[32px] border border-white/10 p-8 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.35)] z-10">
-      
-      <!-- Decorative Floating Sphere in Background (aligned with top-right of the card) -->
-      <div class="absolute -top-12 -right-8 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[#a7f3d0]/30 to-[#0d9488]/30 blur-[2px] -z-10 animate-pulse pointer-events-none"></div>
+      <!-- Calculator Card Section -->
+      <section
+        class="relative w-full bg-gradient-to-br from-[#0c804f]/35 to-[#075936]/35 backdrop-blur-md rounded-[32px] border border-white/10 p-8 sm:p-10 shadow-[0_25px_60px_rgba(0,0,0,0.35)] z-10">
 
-      <!-- Form Inputs -->
-      <div class="flex flex-col gap-6">
-        
-        <!-- Input Row 1: Sampah Select & Stepper -->
-        <div class="flex flex-col gap-2">
-          <label for="jenisSampah" class="text-white text-base font-semibold">Sampah</label>
-          <div class="flex items-center gap-3 w-full">
-            <!-- Dropdown Select -->
-            <div class="relative flex-1">
-              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none">▼</span>
-              <select id="jenisSampah" class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer appearance-none">
-                <option value="" disabled selected>Jenis sampah ....</option>
-                <option value="1">Plastik Campuran</option>
-                <option value="2">Botol Plastik PET</option>
-                <option value="3">Kardus</option>
-                <option value="4">Kertas</option>
-                <option value="5">Kaleng Aluminium</option>
-                <option value="6">Besi Bekas</option>
-                <option value="7">Kaca</option>
-              </select>
-            </div>
-            
-            <!-- Weight Stepper -->
-            <div class="flex items-center gap-2">
-              <button type="button" id="btn-decrement" aria-label="Kurangi Berat" class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">◀</button>
-              <div class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-emerald-950 text-sm">
-                <input type="number" id="beratSampah" value="0" min="0" max="1000" step="1" class="w-full text-center bg-transparent focus:outline-none border-none font-bold text-emerald-950 p-0 m-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+        <!-- Decorative Floating Sphere in Background (aligned with top-right of the card) -->
+        <div
+          class="absolute -top-12 -right-8 w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gradient-to-br from-[#a7f3d0]/30 to-[#0d9488]/30 blur-[2px] -z-10 animate-pulse pointer-events-none">
+        </div>
+
+        <!-- Form Inputs -->
+        <div class="flex flex-col gap-6">
+
+          <!-- Input Row 1: Sampah Select & Stepper -->
+          <div class="flex flex-col gap-2">
+            <label for="jenisSampah" class="text-white text-base font-semibold">Sampah</label>
+            <div class="flex items-center gap-3 w-full">
+              <!-- Dropdown Select -->
+              <div class="relative flex-1">
+                <span
+                  class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 text-xs pointer-events-none">▼</span>
+                <select id="jenisSampah"
+                  class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-semibold text-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer appearance-none">
+                  <option value="" disabled selected>Jenis sampah ....</option>
+                  <option value="1">Plastik Campuran</option>
+                  <option value="2">Botol Plastik PET</option>
+                  <option value="3">Kardus</option>
+                  <option value="4">Kertas</option>
+                  <option value="5">Kaleng Aluminium</option>
+                  <option value="6">Besi Bekas</option>
+                  <option value="7">Kaca</option>
+                </select>
               </div>
-              <button type="button" id="btn-increment" aria-label="Tambah Berat" class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">▶</button>
+
+              <!-- Weight Stepper -->
+              <div class="flex items-center gap-2">
+                <button type="button" id="btn-decrement" aria-label="Kurangi Berat"
+                  class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">◀</button>
+                <div
+                  class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-emerald-950 text-sm">
+                  <input type="number" id="beratSampah" value="0" min="0" max="1000" step="1"
+                    class="w-full text-center bg-transparent focus:outline-none border-none font-bold text-emerald-950 p-0 m-0 [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                </div>
+                <button type="button" id="btn-increment" aria-label="Tambah Berat"
+                  class="text-white hover:text-emerald-300 font-bold px-1 transition-all text-sm cursor-pointer">▶</button>
+              </div>
             </div>
           </div>
-        </div>
 
-        <!-- Input Row 2: Harga Output & unit label (KG) -->
-        <div class="flex flex-col gap-2">
-          <label for="hargaTotalDisplay" class="text-white text-base font-semibold">Harga</label>
-          <div class="flex items-center gap-3 w-full">
-            <!-- Price Display input -->
-            <div class="relative flex-1">
-              <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
-                <!-- SVG Price Tag Icon -->
-                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                  <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
-                </svg>
-              </span>
-              <input type="text" id="hargaTotalDisplay" placeholder="Rp.000.000.000" readonly class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-bold text-sm focus:outline-none cursor-not-allowed">
+          <!-- Input Row 2: Harga Output & unit label (KG) -->
+          <div class="flex flex-col gap-2">
+            <label for="hargaTotalDisplay" class="text-white text-base font-semibold">Harga</label>
+            <div class="flex items-center gap-3 w-full">
+              <!-- Price Display input -->
+              <div class="relative flex-1">
+                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none">
+                  <!-- SVG Price Tag Icon -->
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path
+                      d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z" />
+                  </svg>
+                </span>
+                <input type="text" id="hargaTotalDisplay" placeholder="Rp.000.000.000" readonly
+                  class="w-full bg-white/95 rounded-[18px] pl-10 pr-4 py-3.5 shadow-md text-emerald-950 font-bold text-sm focus:outline-none cursor-not-allowed">
+              </div>
+
+              <!-- Static KG Box -->
+              <div
+                class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-gray-500 text-sm select-none">
+                KG
+              </div>
             </div>
-            
-            <!-- Static KG Box -->
-            <div class="bg-white/95 rounded-[16px] w-16 py-3.5 text-center shadow-md font-bold text-gray-500 text-sm select-none">
-              KG
+          </div>
+
+          <!-- Submit Button -->
+          <button type="button" id="btn-hitung"
+            class="w-full bg-[#0a402a] hover:bg-[#072c1c] active:scale-[0.98] text-white font-bold py-4 rounded-[18px] mt-4 shadow-md transition-all duration-200 cursor-pointer text-center text-sm tracking-wide">
+            Lihat Harga
+          </button>
+
+        </div>
+
+        <!-- Result Card Dropdown (Initially Hidden) -->
+        <div id="hasil-kalkulasi" class="hidden mt-8 pt-6 border-t border-white/10 w-full animate-fade-in">
+          <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
+            Hasil Estimasi
+          </h3>
+          <div class="grid grid-cols-2 gap-4 text-white text-xs mb-4">
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+              <span class="text-emerald-300 font-medium block mb-1">Jenis Sampah</span>
+              <span id="res-jenis" class="text-sm font-bold">Botol Plastik PET</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+              <span class="text-emerald-300 font-medium block mb-1">Berat Total</span>
+              <span id="res-berat" class="text-sm font-bold">5 kg</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+              <span class="text-emerald-300 font-medium block mb-1">Harga / Kg</span>
+              <span id="res-harga-kg" class="text-sm font-bold">Rp4.000</span>
+            </div>
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
+              <span class="text-emerald-300 font-medium block mb-1">Kategori</span>
+              <span id="res-kategori" class="text-sm font-bold">Anorganik</span>
             </div>
           </div>
-        </div>
 
-        <!-- Submit Button -->
-        <button type="button" id="btn-hitung" class="w-full bg-[#0a402a] hover:bg-[#072c1c] active:scale-[0.98] text-white font-bold py-4 rounded-[18px] mt-4 shadow-md transition-all duration-200 cursor-pointer text-center text-sm tracking-wide">
-          Lihat Harga
-        </button>
+          <div class="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-4 text-center mb-4">
+            <span class="text-emerald-300 text-xs font-semibold block mb-1">Total Pendapatan</span>
+            <span id="res-total" class="text-xl sm:text-2xl font-extrabold text-emerald-400">Rp20.000</span>
+          </div>
 
-      </div>
-
-      <!-- Result Card Dropdown (Initially Hidden) -->
-      <div id="hasil-kalkulasi" class="hidden mt-8 pt-6 border-t border-white/10 w-full animate-fade-in">
-        <h3 class="text-white text-lg font-bold mb-4 flex items-center gap-2">
-          Hasil Estimasi
-        </h3>
-        <div class="grid grid-cols-2 gap-4 text-white text-xs mb-4">
-          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
-            <span class="text-emerald-300 font-medium block mb-1">Jenis Sampah</span>
-            <span id="res-jenis" class="text-sm font-bold">Botol Plastik PET</span>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
-            <span class="text-emerald-300 font-medium block mb-1">Berat Total</span>
-            <span id="res-berat" class="text-sm font-bold">5 kg</span>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
-            <span class="text-emerald-300 font-medium block mb-1">Harga / Kg</span>
-            <span id="res-harga-kg" class="text-sm font-bold">Rp4.000</span>
-          </div>
-          <div class="bg-white/5 border border-white/10 rounded-xl p-3.5">
-            <span class="text-emerald-300 font-medium block mb-1">Kategori</span>
-            <span id="res-kategori" class="text-sm font-bold">Anorganik</span>
+          <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
+            <h4 class="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
+              ♻️ Manfaat Daur Ulang
+            </h4>
+            <p id="res-manfaat" class="text-xs text-white/90 leading-relaxed font-light">
+              Dapat didaur ulang menjadi serat tekstil, pot tanaman, atau produk plastik baru.
+            </p>
           </div>
         </div>
-        
-        <div class="bg-emerald-500/10 border border-emerald-500/25 rounded-2xl p-4 text-center mb-4">
-          <span class="text-emerald-300 text-xs font-semibold block mb-1">Total Pendapatan</span>
-          <span id="res-total" class="text-xl sm:text-2xl font-extrabold text-emerald-400">Rp20.000</span>
-        </div>
 
-        <div class="bg-white/5 border border-white/10 rounded-2xl p-4">
-          <h4 class="text-xs font-bold text-emerald-300 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-            ♻️ Manfaat Daur Ulang
-          </h4>
-          <p id="res-manfaat" class="text-xs text-white/90 leading-relaxed font-light">
-            Dapat didaur ulang menjadi serat tekstil, pot tanaman, atau produk plastik baru.
-          </p>
-        </div>
-      </div>
+      </section>
 
-    </section>
-
-    <!-- Bottom Quote Section with splatter SVG background -->
-    <section class="relative w-full flex items-center justify-center py-24 px-8 max-w-[650px]">
-      <!-- SPLATTER SVG BACKGROUND -->
-      <svg viewBox="0 0 400 300" class="splatter-svg absolute inset-0 w-full h-full fill-emerald-500/25 z-10 filter blur-[0.5px] pointer-events-none">
-        <path class="blob-1" d="M200 40 C250 30, 280 80, 310 110 C340 140, 370 180, 350 220 C330 260, 270 270, 220 280 C170 290, 110 280, 80 240 C50 200, 30 150, 60 110 C90 70, 150 50, 200 40" />
-        <path class="blob-2" d="M120 70 C140 50, 180 60, 200 80 C220 100, 210 130, 190 150 C170 170, 130 180, 110 160 C90 140, 100 90, 120 70" />
-        <path class="blob-3" d="M260 180 C280 160, 310 170, 330 190 C350 210, 340 240, 320 250 C300 260, 270 250, 250 230 C230 210, 240 200, 260 180" />
-        <circle class="drop-1" cx="85" cy="55" r="7" />
-        <circle class="drop-2" cx="65" cy="210" r="9" />
-        <circle class="drop-3" cx="315" cy="65" r="6" />
-        <circle class="drop-1" cx="345" cy="115" r="5" />
-        <circle class="drop-2" cx="155" cy="245" r="8" />
-        <circle class="drop-3" cx="285" cy="75" r="10" />
-      </svg>
-      <!-- Quote Content -->
-      <blockquote class="quote-font text-white text-center leading-relaxed text-2xl sm:text-3xl lg:text-[38px] select-none z-11">
-        "Lingkungan bukanlah milik siapa pun untuk dihancurkan; itu tanggung jawab semua orang untuk melindunginya."
-      </blockquote>
-    </section>
+      <!-- Bottom Quote Section with splatter SVG background -->
+      <section class="relative w-full flex items-center justify-center py-24 px-8 max-w-[650px]">
+        <!-- SPLATTER SVG BACKGROUND -->
+        <svg viewBox="0 0 400 300"
+          class="splatter-svg absolute inset-0 w-full h-full fill-emerald-500/25 z-10 filter blur-[0.5px] pointer-events-none">
+          <path class="blob-1"
+            d="M200 40 C250 30, 280 80, 310 110 C340 140, 370 180, 350 220 C330 260, 270 270, 220 280 C170 290, 110 280, 80 240 C50 200, 30 150, 60 110 C90 70, 150 50, 200 40" />
+          <path class="blob-2"
+            d="M120 70 C140 50, 180 60, 200 80 C220 100, 210 130, 190 150 C170 170, 130 180, 110 160 C90 140, 100 90, 120 70" />
+          <path class="blob-3"
+            d="M260 180 C280 160, 310 170, 330 190 C350 210, 340 240, 320 250 C300 260, 270 250, 250 230 C230 210, 240 200, 260 180" />
+          <circle class="drop-1" cx="85" cy="55" r="7" />
+          <circle class="drop-2" cx="65" cy="210" r="9" />
+          <circle class="drop-3" cx="315" cy="65" r="6" />
+          <circle class="drop-1" cx="345" cy="115" r="5" />
+          <circle class="drop-2" cx="155" cy="245" r="8" />
+          <circle class="drop-3" cx="285" cy="75" r="10" />
+        </svg>
+        <!-- Quote Content -->
+        <blockquote
+          class="quote-font text-white text-center leading-relaxed text-2xl sm:text-3xl lg:text-[38px] select-none z-11">
+          "Lingkungan bukanlah milik siapa pun untuk dihancurkan; itu tanggung jawab semua orang untuk melindunginya."
+        </blockquote>
+      </section>
     </div>
   </section>
 
 
-  <footer class="relative w-full mt-24 pt-20 pb-8 rounded-t-[40px] md:rounded-t-[60px] bg-gradient-to-br from-[#e8faf0] via-[#e2faf0] to-[#c1f5d8] shadow-[0_-15px_50px_rgba(0,0,0,0.1)]">
-    
+  <footer
+    class="relative w-full mt-24 pt-20 pb-8 rounded-t-[40px] md:rounded-t-[60px] bg-gradient-to-br from-[#e8faf0] via-[#e2faf0] to-[#c1f5d8] shadow-[0_-15px_50px_rgba(0,0,0,0.1)]">
+
     <!-- Centered Overlapping Logo Pill -->
-    <div class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white px-8 py-3.5 rounded-full shadow-[0_10px_35px_rgba(16,93,59,0.15)] flex items-center gap-3 border border-[#c1f5d8] transition-transform duration-300 hover:scale-105">
+    <div
+      class="absolute -top-8 left-1/2 -translate-x-1/2 bg-white px-8 py-3.5 rounded-full shadow-[0_10px_35px_rgba(16,93,59,0.15)] flex items-center gap-3 border border-[#c1f5d8] transition-transform duration-300 hover:scale-105">
       <img src="bagian/img/logo.svg" alt="" class="w-10 h-10">
       <span class="text-xl font-bold tracking-wide text-[#0a402a]">ReBorn Waste</span>
     </div>
 
     <!-- Main Footer Grid -->
     <div class="max-w-6xl mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
-      
+
       <!-- Left Column: Headline and Action Buttons -->
       <div class="col-span-1 md:col-span-6 flex flex-col items-start justify-center gap-6">
         <h2 class="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-[#0a402a] leading-tight">
           Mulai Dari<br>Dirimu Sekarang
         </h2>
         <div class="flex flex-wrap items-center gap-4">
-          <a href="#contact" id="footer-btn-contact" class="px-7 py-3 bg-[#0a402a] text-white text-sm font-medium rounded-full shadow-md hover:bg-[#072c1c] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+          <a href="#contact" id="footer-btn-contact"
+            class="px-7 py-3 bg-[#0a402a] text-white text-sm font-medium rounded-full shadow-md hover:bg-[#072c1c] hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
             Contact
           </a>
-          <a href="#send-message" id="footer-btn-message" class="px-7 py-3 bg-[#c6f6df] text-[#0a402a] text-sm font-medium rounded-full shadow-sm hover:bg-[#b0ecd0] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
+          <a href="#send-message" id="footer-btn-message"
+            class="px-7 py-3 bg-[#c6f6df] text-[#0a402a] text-sm font-medium rounded-full shadow-sm hover:bg-[#b0ecd0] hover:shadow-md hover:-translate-y-0.5 transition-all duration-300">
             Send Message
           </a>
         </div>
@@ -2029,23 +2072,28 @@
       <div class="col-span-1 sm:col-span-6 md:col-span-3 flex flex-col items-start gap-5">
         <h3 class="text-lg font-bold text-[#0a402a] tracking-wide">Navigate</h3>
         <ul class="flex flex-col gap-3.5 w-full">
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#" id="nav-link-home" class="w-full">Home</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="##about" id="nav-link-about" class="w-full">About</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#belajar-section" id="nav-link-pilah" class="w-full">Pilah</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#data-section" id="nav-link-data" class="w-full">Data</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#edukasi-section" id="nav-link-video" class="w-full">Video</a>
           </li>
@@ -2056,19 +2104,23 @@
       <div class="col-span-1 sm:col-span-6 md:col-span-3 flex flex-col items-start gap-5">
         <h3 class="text-lg font-bold text-[#0a402a] tracking-wide">Company</h3>
         <ul class="flex flex-col gap-3.5 w-full">
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#project" id="company-link-project" class="w-full">Project</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#contact-section" id="company-link-contact" class="w-full">Contact</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#opensource" id="company-link-open" class="w-full">Open Source</a>
           </li>
-          <li class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
+          <li
+            class="flex items-center gap-3 text-sm font-medium text-[#0a402a]/80 hover:text-[#0a402a] transition-all hover:translate-x-1.5 duration-250">
             <span class="w-1.5 h-1.5 rounded-full bg-[#0a402a] shrink-0"></span>
             <a href="#blog" id="company-link-blog" class="w-full">Blog</a>
           </li>
@@ -2078,8 +2130,9 @@
     </div>
 
     <!-- Bottom Bar (Divider & Legal/Socials) -->
-    <div class="max-w-6xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-[#0a402a]/15 flex flex-col sm:flex-row items-center justify-between gap-6">
-      
+    <div
+      class="max-w-6xl mx-auto px-6 md:px-12 mt-16 pt-8 border-t border-[#0a402a]/15 flex flex-col sm:flex-row items-center justify-between gap-6">
+
       <!-- Copyright Info -->
       <span class="text-xs text-[#0a402a]/60 text-center sm:text-left font-medium tracking-wide">
         &copy; ReBorn Waste. All rights reserved
@@ -2088,30 +2141,38 @@
       <!-- Social Media Icons -->
       <div class="flex items-center gap-4">
         <!-- Instagram -->
-        <a href="#instagram" id="social-instagram" aria-label="Instagram" class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
+        <a href="#instagram" id="social-instagram" aria-label="Instagram"
+          class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+            <path
+              d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
           </svg>
         </a>
-        
+
         <!-- WhatsApp -->
-        <a href="#whatsapp" id="social-whatsapp" aria-label="WhatsApp" class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
+        <a href="#whatsapp" id="social-whatsapp" aria-label="WhatsApp"
+          class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.498 4.796 1.499 5.229 0 9.483-4.259 9.485-9.493.002-2.535-.985-4.917-2.779-6.713-1.793-1.796-4.17-2.784-6.712-2.785-5.234 0-9.49 4.259-9.492 9.494-.001 2.062.536 3.072 1.534 4.803l-.997 3.642 3.86-.988-.135-.067zM17.15 14.77c-.285-.143-1.687-.832-1.947-.927-.26-.096-.45-.143-.639.143-.19.285-.733.927-.899 1.117-.166.19-.332.214-.617.071-.285-.143-1.204-.444-2.293-1.415-.848-.756-1.42-1.69-1.587-1.975-.166-.285-.018-.44.125-.581.128-.127.285-.332.427-.499.143-.166.19-.285.285-.475.095-.19.047-.356-.024-.499-.071-.143-.639-1.537-.876-2.108-.23-.553-.465-.477-.639-.486-.165-.008-.355-.01-.545-.01-.19 0-.5.071-.762.356-.262.285-1 .976-1 2.38 0 1.403 1.02 2.76 1.163 2.95.143.19 2.01 3.07 4.869 4.298.68.293 1.213.468 1.628.6.684.217 1.307.186 1.8.113.548-.082 1.687-.69 1.924-1.357.238-.667.238-1.238.166-1.357-.07-.119-.26-.19-.546-.333z"/>
+            <path
+              d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.455L0 24zm6.59-4.846c1.6.95 2.766 1.498 4.796 1.499 5.229 0 9.483-4.259 9.485-9.493.002-2.535-.985-4.917-2.779-6.713-1.793-1.796-4.17-2.784-6.712-2.785-5.234 0-9.49 4.259-9.492 9.494-.001 2.062.536 3.072 1.534 4.803l-.997 3.642 3.86-.988-.135-.067zM17.15 14.77c-.285-.143-1.687-.832-1.947-.927-.26-.096-.45-.143-.639.143-.19.285-.733.927-.899 1.117-.166.19-.332.214-.617.071-.285-.143-1.204-.444-2.293-1.415-.848-.756-1.42-1.69-1.587-1.975-.166-.285-.018-.44.125-.581.128-.127.285-.332.427-.499.143-.166.19-.285.285-.475.095-.19.047-.356-.024-.499-.071-.143-.639-1.537-.876-2.108-.23-.553-.465-.477-.639-.486-.165-.008-.355-.01-.545-.01-.19 0-.5.071-.762.356-.262.285-1 .976-1 2.38 0 1.403 1.02 2.76 1.163 2.95.143.19 2.01 3.07 4.869 4.298.68.293 1.213.468 1.628.6.684.217 1.307.186 1.8.113.548-.082 1.687-.69 1.924-1.357.238-.667.238-1.238.166-1.357-.07-.119-.26-.19-.546-.333z" />
           </svg>
         </a>
 
         <!-- Email / Mail -->
-        <a href="mailto:info@rebornwaste.com" id="social-email" aria-label="Email" class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
+        <a href="mailto:info@rebornwaste.com" id="social-email" aria-label="Email"
+          class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z"/>
+            <path
+              d="M0 3v18h24v-18h-24zm21.518 2l-9.518 7.713-9.518-7.713h19.036zm-19.518 14v-11.817l10 8.104 10-8.104v11.817h-20z" />
           </svg>
         </a>
 
         <!-- Facebook -->
-        <a href="#facebook" id="social-facebook" aria-label="Facebook" class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
+        <a href="#facebook" id="social-facebook" aria-label="Facebook"
+          class="w-9 h-9 border border-[#0a402a]/30 rounded-full flex items-center justify-center text-[#0a402a] hover:bg-[#0a402a] hover:text-white hover:border-[#0a402a] hover:scale-105 transition-all duration-300">
           <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
-            <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+            <path
+              d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
           </svg>
         </a>
       </div>
@@ -2244,28 +2305,28 @@
     // ── SECTION 3 (EDUKASI) SCRIPTS ──
     const link = [
       {
-        "judul" : "Yuk, Memilah Sampah - Video Edukasi PHINLA",
-        "url" : "https://youtu.be/37Yj84NjCGU?si=XJAEULcxmcRy-QHB"
+        "judul": "Yuk, Memilah Sampah - Video Edukasi PHINLA",
+        "url": "https://youtu.be/37Yj84NjCGU?si=XJAEULcxmcRy-QHB"
       },
       {
-        "judul" : "Sampah Sandi (Animasi, 2019)",
-        "url" : "https://youtu.be/snRhl3ING0Y?si=UM7XYL7OWg7z9xjo"
+        "judul": "Sampah Sandi (Animasi, 2019)",
+        "url": "https://youtu.be/snRhl3ING0Y?si=UM7XYL7OWg7z9xjo"
       },
       {
-        "judul" : "Video Edukasi : Membuang Sampah pada Tempatnya",
-        "url" : "https://youtu.be/eIYVJKGmPXk?si=zJ2UALUhhbolmsGP"
+        "judul": "Video Edukasi : Membuang Sampah pada Tempatnya",
+        "url": "https://youtu.be/eIYVJKGmPXk?si=zJ2UALUhhbolmsGP"
       },
       {
-        "judul" : "Video Animasi Cara Pengelolaan Sampah, \"Sampahku Tanggung Jawabku\"",
-        "url" : "https://youtu.be/CGd3lgxReFE?si=KiO8TjcLhlF5ppFg"
+        "judul": "Video Animasi Cara Pengelolaan Sampah, \"Sampahku Tanggung Jawabku\"",
+        "url": "https://youtu.be/CGd3lgxReFE?si=KiO8TjcLhlF5ppFg"
       },
       {
-        "judul" : "Iklan Layanan Masyarakat | BUANGLAH SAMPAH PADA TEMPATNYA",
-        "url" : "https://youtu.be/-0-uEnBUgeA?si=tt6DLCrexIGi-vQ0"
+        "judul": "Iklan Layanan Masyarakat | BUANGLAH SAMPAH PADA TEMPATNYA",
+        "url": "https://youtu.be/-0-uEnBUgeA?si=tt6DLCrexIGi-vQ0"
       },
       {
-        "judul" : "Sejauh Mana Masalah Sampah di Indonesia?",
-        "url" : "https://youtu.be/i0bb7Et0ots?si=NLVki2bRdGdw3A-V"
+        "judul": "Sejauh Mana Masalah Sampah di Indonesia?",
+        "url": "https://youtu.be/i0bb7Et0ots?si=NLVki2bRdGdw3A-V"
       }
     ];
 
@@ -2282,14 +2343,14 @@
     link.forEach((item, index) => {
       const id = getYoutubeId(item.url);
       const thumbnailUrl = `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
-      
+
       const card = document.createElement('a');
       card.href = item.url;
       card.id = `video-card-${id || index}`;
       card.target = '_blank';
       card.rel = 'noopener noreferrer';
       card.className = 'group relative block aspect-[16/9] w-full rounded-[20px] overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-1.5 transition-all duration-300 bg-emerald-950/40';
-      
+
       card.innerHTML = `
         <img src="${thumbnailUrl}" alt="${item.judul}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
         <!-- Overlay -->
@@ -2306,7 +2367,7 @@
           </p>
         </div>
       `;
-      
+
       grid.appendChild(card);
     });
 
@@ -2434,7 +2495,7 @@
       const item = dataSampah.find(s => s.id == selectVal);
       if (item) {
         const total = beratVal * item.hargaPerKg;
-        
+
         // Populate results
         document.getElementById("res-jenis").textContent = item.nama;
         document.getElementById("res-berat").textContent = `${beratVal} kg`;
@@ -2642,7 +2703,7 @@
       const progressCircle = document.getElementById("loader-progress-circle");
       const counterText = document.getElementById("loader-counter-text");
       const loaderScreen = document.getElementById("loader-screen");
-      
+
       const totalLength = 314.16; // 2 * Math.PI * r (r=50)
 
       // Set initial values
@@ -2687,15 +2748,15 @@
         stagger: 0.05,
         ease: "power2.in"
       })
-      // 4. Slide out loader screen
-      .to(loaderScreen, {
-        yPercent: -100,
-        duration: 1.0,
-        ease: "power4.inOut"
-      }, "-=0.1")
-      .to(loaderScreen, {
-        display: "none"
-      });
+        // 4. Slide out loader screen
+        .to(loaderScreen, {
+          yPercent: -100,
+          duration: 1.0,
+          ease: "power4.inOut"
+        }, "-=0.1")
+        .to(loaderScreen, {
+          display: "none"
+        });
 
       // 5. Staggered reveal of hero content
       tl.from("#hero-section h1", {
@@ -2704,32 +2765,32 @@
         duration: 1.2,
         ease: "power4.out"
       }, "-=0.8")
-      .from("#hero-section p", {
-        opacity: 0,
-        y: 40,
-        duration: 1.0,
-        ease: "power3.out"
-      }, "-=0.95")
-      .from("#hero-section button", {
-        opacity: 0,
-        y: 30,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power3.out"
-      }, "-=0.8")
-      .from("#main-navbar", {
-        opacity: 0,
-        y: -40,
-        duration: 1.0,
-        ease: "power4.out"
-      }, "-=1.1");
+        .from("#hero-section p", {
+          opacity: 0,
+          y: 40,
+          duration: 1.0,
+          ease: "power3.out"
+        }, "-=0.95")
+        .from("#hero-section button", {
+          opacity: 0,
+          y: 30,
+          duration: 0.8,
+          stagger: 0.15,
+          ease: "power3.out"
+        }, "-=0.8")
+        .from("#main-navbar", {
+          opacity: 0,
+          y: -40,
+          duration: 1.0,
+          ease: "power4.out"
+        }, "-=1.1");
     });
 
     // ── BELAJAR MODAL SYSTEM ──
     const modalData = {
       pembuangan: {
         img: 'bagian/img/Rectangle 14.webp',
-        tag: '🗑️ Pembuangan Sampah',
+        tag: 'Pembuangan Sampah',
         title: 'Pembuangan & Pemilahan Sampah',
         desc: 'Langkah pertama yang paling penting dalam pengelolaan sampah adalah membuang sampah sesuai jenisnya sejak dari sumbernya. Pemilahan yang benar memudahkan proses daur ulang dan mencegah kontaminasi.',
         steps: [
@@ -2742,7 +2803,7 @@
       },
       pengolahan: {
         img: 'bagian/img/Rectangle 15.jpeg',
-        tag: '⚙️ Proses Pengolahan',
+        tag: 'Proses Pengolahan',
         title: 'Proses Pengolahan Sampah',
         desc: 'Setelah dikumpulkan, sampah melewati serangkaian proses sebelum dapat didaur ulang atau dimanfaatkan. Setiap tahap sangat penting untuk memastikan sampah diolah secara optimal dan aman bagi lingkungan.',
         steps: [
@@ -2755,7 +2816,7 @@
       },
       produk: {
         img: 'bagian/img/Rectangle 16.webp',
-        tag: '✨ Hasil Produk',
+        tag: 'Hasil Produk',
         title: 'Produk Hasil Daur Ulang',
         desc: 'Sampah yang telah melalui proses pengolahan yang benar dapat berubah menjadi produk-produk baru yang bernilai ekonomi tinggi dan ramah lingkungan. Ini adalah bukti nyata konsep ekonomi sirkular.',
         steps: [
@@ -2768,32 +2829,148 @@
       }
     };
 
-    const modal       = document.getElementById('belajar-modal');
-    const modalBox    = document.getElementById('modal-box');
-    const modalBg     = document.getElementById('modal-backdrop');
-    const modalImg    = document.getElementById('modal-hero-img');
-    const modalTag    = document.getElementById('modal-tag-text');
-    const modalTitle  = document.getElementById('modal-title-text');
-    const modalDesc   = document.getElementById('modal-desc-text');
-    const modalSteps  = document.getElementById('modal-steps-container');
-    const modalClose  = document.getElementById('modal-close-btn');
+    const modal = document.getElementById('belajar-modal');
+    const modalBox = document.getElementById('modal-box');
+    const modalBg = document.getElementById('modal-backdrop');
+    const modalImg = document.getElementById('modal-hero-img');
+    const modalTag = document.getElementById('modal-tag-text');
+    const modalTitle = document.getElementById('modal-title-text');
+    const modalDesc = document.getElementById('modal-desc-text');
+    const modalSteps = document.getElementById('modal-steps-container');
+    const modalClose = document.getElementById('modal-close-btn');
 
     function openModal(key) {
       const data = modalData[key];
       if (!data) return;
 
       // Populate content
-      modalImg.src    = data.img;
-      modalImg.alt    = data.title;
+      modalImg.src = data.img;
+      modalImg.alt = data.title;
       modalTag.innerHTML = data.tag;
       modalTitle.textContent = data.title;
-      modalDesc.textContent  = data.desc;
-      modalSteps.innerHTML   = data.steps.map((s, i) =>
-        `<div class="modal-step">
-          <div class="modal-step-num">${i + 1}</div>
-          <p class="modal-step-text">${s}</p>
-        </div>`
-      ).join('');
+      modalDesc.textContent = data.desc;
+
+      // Define SVG icons and colors for each step in each modal category
+      const stepConfig = {
+        pembuangan: [
+          {
+            color: 'bg-green-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+            </svg>`
+          },
+          {
+            color: 'bg-yellow-500',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>`
+          },
+          {
+            color: 'bg-red-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>`
+          },
+          {
+            color: 'bg-emerald-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25s-7.5-4.108-7.5-11.25a7.5 7.5 0 1115 0z" />
+            </svg>`
+          },
+          {
+            color: 'bg-emerald-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" />
+            </svg>`
+          }
+        ],
+        pengolahan: [
+          {
+            color: 'bg-emerald-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124l-.321-5.128a3.375 3.375 0 00-3.37-3.165h-2.285M8.25 5.25h9.75m-9.75 3h9.75m-9.75 3h9.75m-9.75 3h9.75" />
+            </svg>`
+          },
+          {
+            color: 'bg-emerald-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 7.5L7.5 3m0 0L12 7.5M7.5 3v13.5m13.5 0L16.5 21m0 0L12 16.5m4.5 4.5V7.5" />
+            </svg>`
+          },
+          {
+            color: 'bg-green-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M12 3c-3 0-6 2-6 6 0 3 2 5.5 5 6.5M12 3c3 0 6 2 6 6 0 3-2 5.5-5 6.5M12 11h.01M12 7h.01M12 15h.01" />
+            </svg>`
+          },
+          {
+            color: 'bg-yellow-500',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+            </svg>`
+          },
+          {
+            color: 'bg-red-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 13.5l3 3 6-6M19.5 12A7.5 7.5 0 1112 4.5c.38 0 .75.03 1.12.08" />
+            </svg>`
+          }
+        ],
+        produk: [
+          {
+            color: 'bg-green-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v18M12 3c-3 0-6 2-6 6 0 3 2 5.5 5 6.5M12 3c3 0 6 2 6 6 0 3-2 5.5-5 6.5M12 11h.01M12 7h.01M12 15h.01" />
+            </svg>`
+          },
+          {
+            color: 'bg-yellow-500',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9.75 3.104v1.242c0 .289-.139.56-.375.727L7.13 6.643a1.5 1.5 0 00-.63 1.222v2.642a1.5 1.5 0 00.44 1.06l3.81 3.81a1.5 1.5 0 002.12 0l3.81-3.81a1.5 1.5 0 00.44-1.06V7.865a1.5 1.5 0 00-.63-1.222l-2.245-1.57a.9.9 0 01-.375-.727V3.104M9 21h6" />
+            </svg>`
+          },
+          {
+            color: 'bg-amber-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+            </svg>`
+          },
+          {
+            color: 'bg-indigo-600',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m12 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4M6 20h12" />
+            </svg>`
+          },
+          {
+            color: 'bg-orange-500',
+            icon: `<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+            </svg>`
+          }
+        ]
+      };
+
+      const configs = stepConfig[key] || [];
+
+      modalSteps.innerHTML = data.steps.map((s, i) => {
+        const conf = configs[i] || { color: 'bg-emerald-600', icon: '<svg class="w-8 h-8 text-gray-700" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"></svg>' };
+        return `
+          <div class="flex items-stretch bg-gray-50 rounded-lg overflow-hidden border border-gray-100">
+            <div class="w-12 ${conf.color} flex flex-col items-center justify-center text-white font-bold text-lg select-none">
+              ${i + 1}
+            </div>
+            <div class="p-4 flex items-center gap-4">
+              <div class="flex-shrink-0">
+                ${conf.icon}
+              </div>
+              <p class="text-sm text-gray-600">
+                ${s}
+              </p>
+            </div>
+          </div>
+        `;
+      }).join('');
 
       // Lock background scroll natively and stop Lenis scroll
       document.documentElement.style.overflow = 'hidden';
@@ -2846,4 +3023,5 @@
   </script>
 
 </body>
+
 </html>
