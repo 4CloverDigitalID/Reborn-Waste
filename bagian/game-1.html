@@ -1,0 +1,1596 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Game 1: Pemilahan Sampah - Reborn Waste</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Poppins:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+  
+  <!-- Canvas Confetti for Victory Screen -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --teal-dark: #00473d;
+      --teal-base: #00766a;
+      --teal-light: #00a887;
+      --teal-bright: #00bd96;
+      --emerald-dark: #0d7056;
+      --emerald-base: #159b77;
+      --emerald-light: #1db88e;
+      --emerald-border: #148060;
+      
+      --organik-color: #27ae60;
+      --anorganik-color: #f39c12;
+      --b3-color: #e74c3c;
+
+      --waste-item-size: 78px;
+      --bins-station-height: 195px;
+      --hud-height: 60px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      height: 100dvh;
+      overflow: hidden;
+      font-family: 'Poppins', 'Inter', sans-serif;
+      user-select: none;
+      -webkit-user-select: none;
+      background: #3e2723;
+      touch-action: none;
+      overscroll-behavior: none;
+    }
+
+    /* ══════════════════════════════════════════════
+       FULLSCREEN GAME CONTAINER & BACKGROUND
+       ══════════════════════════════════════════════ */
+    #game-stage {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      height: 100dvh;
+      overflow: hidden;
+      background: url('img/Game-1/Background.png') no-repeat center center;
+      background-size: cover;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    /* Top Navigation & Status Bar */
+    .top-bar {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      right: 0;
+      padding: 0 clamp(10px, 3vw, 28px);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 30;
+      pointer-events: none;
+      gap: 8px;
+    }
+
+    .top-bar > * {
+      pointer-events: auto;
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-back-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(13, 112, 86, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 9999px;
+      font-size: clamp(11px, 2.5vw, 13px);
+      font-weight: 700;
+      text-decoration: none;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.28);
+      transition: all 0.25s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-back-home:hover {
+      transform: translateY(-2px) scale(1.03);
+      background: rgba(13, 112, 86, 1);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+    }
+
+    .score-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: clamp(6px, 1.5vw, 12px);
+      background: rgba(0, 45, 36, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      color: #ffffff;
+      padding: 6px clamp(10px, 2.5vw, 18px);
+      border-radius: 9999px;
+      font-size: clamp(11px, 2.6vw, 14px);
+      font-weight: 700;
+      border: 1.5px solid rgba(0, 189, 150, 0.45);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      white-space: nowrap;
+    }
+
+    .progress-bar-wrap {
+      width: clamp(55px, 12vw, 110px);
+      height: 9px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 9999px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #1db88e, #00bd96);
+      border-radius: 9999px;
+      transition: width 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .hud-btn {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1.5px solid rgba(255, 255, 255, 0.7);
+      color: #00473d;
+      width: clamp(34px, 7vw, 40px);
+      height: clamp(34px, 7vw, 40px);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: clamp(14px, 3.5vw, 18px);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22);
+      transition: all 0.25s ease;
+      outline: none;
+    }
+
+    .hud-btn:hover {
+      transform: scale(1.08);
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hud-btn:active {
+      transform: scale(0.94);
+    }
+
+    /* ══════════════════════════════════════════════
+       SPAWN PLAYFIELD (WASTE ITEMS SCATTERED)
+       ══════════════════════════════════════════════ */
+    #waste-field {
+      position: absolute;
+      top: var(--hud-height);
+      left: 0;
+      right: 0;
+      bottom: var(--bins-station-height);
+      z-index: 10;
+      pointer-events: auto;
+      overflow: visible;
+    }
+
+    .waste-item {
+      position: absolute;
+      width: var(--waste-item-size);
+      height: var(--waste-item-size);
+      cursor: grab;
+      touch-action: none;
+      pointer-events: auto;
+      transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.25s ease, opacity 0.3s ease;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.45));
+      z-index: 12;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transform: translate(-50%, -50%);
+    }
+
+    .waste-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .waste-item:hover {
+      transform: translate(-50%, -50%) scale(1.15) rotate(4deg);
+      filter: drop-shadow(0 12px 20px rgba(0, 0, 0, 0.55));
+      z-index: 25;
+    }
+
+    .waste-item.selected {
+      transform: translate(-50%, -50%) scale(1.22) !important;
+      z-index: 80 !important;
+      filter: drop-shadow(0 0 16px #00bd96) drop-shadow(0 10px 20px rgba(0, 0, 0, 0.6)) !important;
+      animation: selectPulse 1.2s infinite alternate ease-in-out;
+    }
+
+    @keyframes selectPulse {
+      0% { transform: translate(-50%, -50%) scale(1.18); }
+      100% { transform: translate(-50%, -50%) scale(1.28); }
+    }
+
+    .waste-item.dragging {
+      cursor: grabbing;
+      opacity: 0.96;
+      transform: translate(-50%, -50%) scale(1.3) !important;
+      z-index: 100 !important;
+      filter: drop-shadow(0 18px 30px rgba(0, 0, 0, 0.7)) drop-shadow(0 0 12px rgba(0, 255, 200, 0.6)) !important;
+      transition: none !important;
+    }
+
+    .waste-item.absorbing {
+      animation: absorbItem 0.45s forwards cubic-bezier(0.55, 0.085, 0.68, 0.53);
+      pointer-events: none;
+    }
+
+    @keyframes absorbItem {
+      0% {
+        transform: translate(-50%, -50%) scale(1.2) rotate(0deg);
+        opacity: 1;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(0.6) rotate(140deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translate(-50%, -50%) scale(0) rotate(280deg);
+        opacity: 0;
+      }
+    }
+
+    /* Selected Item Floating Helper Bubble */
+    .item-select-hint {
+      position: absolute;
+      top: -34px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 45, 36, 0.92);
+      color: #00bd96;
+      border: 1px solid #00bd96;
+      padding: 3px 10px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 700;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      animation: bounceHint 0.8s infinite alternate ease-in-out;
+    }
+
+    @keyframes bounceHint {
+      0% { transform: translateX(-50%) translateY(0); }
+      100% { transform: translateX(-50%) translateY(-5px); }
+    }
+
+    /* ══════════════════════════════════════════════
+       BOTTOM RECYCLING BINS STATION
+       ══════════════════════════════════════════════ */
+    #bins-station {
+      position: absolute;
+      bottom: 8px;
+      left: 0;
+      right: 0;
+      height: var(--bins-station-height);
+      display: flex;
+      justify-content: space-around;
+      align-items: flex-end;
+      padding: 0 clamp(8px, 3vw, 40px);
+      z-index: 20;
+      pointer-events: none;
+    }
+
+    .bin-zone {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      width: clamp(90px, 28vw, 210px);
+      max-width: 210px;
+      height: 100%;
+      pointer-events: auto;
+      cursor: pointer;
+      transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+      touch-action: none;
+    }
+
+    .bin-zone img.bin-image {
+      width: 100%;
+      max-height: calc(var(--bins-station-height) - 40px);
+      object-fit: contain;
+      filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.5));
+      transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.3s ease;
+      pointer-events: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .bin-label-badge {
+      margin-top: 2px;
+      padding: clamp(3px, 1vw, 5px) clamp(10px, 2.5vw, 16px);
+      border-radius: 9999px;
+      font-size: clamp(10px, 2.4vw, 13px);
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+      border: 1.5px solid rgba(255, 255, 255, 0.45);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .bin-zone[data-category="organik"] .bin-label-badge {
+      background: linear-gradient(135deg, #1b7a43, #27ae60);
+    }
+
+    .bin-zone[data-category="anorganik"] .bin-label-badge {
+      background: linear-gradient(135deg, #d38b00, #f39c12);
+    }
+
+    .bin-zone[data-category="b3"] .bin-label-badge {
+      background: linear-gradient(135deg, #b71c1c, #e74c3c);
+    }
+
+    /* Bin Hover & Drag-over State */
+    .bin-zone.drag-over {
+      transform: translateY(-10px) scale(1.08);
+    }
+
+    .bin-zone.drag-over img.bin-image {
+      filter: drop-shadow(0 16px 28px rgba(0, 255, 180, 0.8)) brightness(1.15);
+    }
+
+    .bin-zone.correct-pulse {
+      animation: binSuccessBounce 0.55s ease;
+    }
+
+    @keyframes binSuccessBounce {
+      0% { transform: scale(1); }
+      35% { transform: scale(1.16) translateY(-12px); filter: brightness(1.25); }
+      70% { transform: scale(0.96) translateY(2px); }
+      100% { transform: scale(1) translateY(0); }
+    }
+
+    .bin-zone.wrong-shake {
+      animation: binErrorShake 0.45s ease;
+    }
+
+    @keyframes binErrorShake {
+      0%, 100% { transform: translateX(0); }
+      20% { transform: translateX(-12px) rotate(-3deg); }
+      40% { transform: translateX(12px) rotate(3deg); }
+      60% { transform: translateX(-8px) rotate(-1.5deg); }
+      80% { transform: translateX(8px) rotate(1.5deg); }
+    }
+
+    /* Floating Feedback Popups */
+    .floating-feedback {
+      position: absolute;
+      top: -24px;
+      font-size: clamp(12px, 2.8vw, 15px);
+      font-weight: 800;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      pointer-events: none;
+      z-index: 60;
+      white-space: nowrap;
+      animation: floatUpFade 0.9s forwards cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .floating-feedback.correct {
+      background: #27ae60;
+      color: #fff;
+      border: 1.5px solid #a9dfbf;
+      box-shadow: 0 4px 14px rgba(39, 174, 96, 0.55);
+    }
+
+    .floating-feedback.wrong {
+      background: #e74c3c;
+      color: #fff;
+      border: 1.5px solid #f5b7b1;
+      box-shadow: 0 4px 14px rgba(231, 76, 60, 0.55);
+    }
+
+    @keyframes floatUpFade {
+      0% {
+        opacity: 0;
+        transform: translateY(10px) scale(0.7);
+      }
+      30% {
+        opacity: 1;
+        transform: translateY(-12px) scale(1.08);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-38px) scale(1);
+      }
+    }
+
+    /* ══════════════════════════════════════════════
+       MODALS COMMON STYLES
+       ══════════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(12, 8, 5, 0.55);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.35s ease, backdrop-filter 0.35s ease;
+      padding: clamp(12px, 3vw, 24px);
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Modal Cards Base */
+    .modal-card-box {
+      background: linear-gradient(145deg, #0d7056 0%, #159a74 50%, #1db88b 100%);
+      border: 3px solid #148060;
+      box-shadow: 
+        inset 0 2px 5px rgba(255, 255, 255, 0.45),
+        inset 0 -4px 8px rgba(0, 0, 0, 0.28),
+        0 20px 45px rgba(0, 0, 0, 0.5);
+      border-radius: clamp(20px, 4vw, 28px);
+      padding: clamp(20px, 4.5vw, 36px) clamp(16px, 4vw, 32px);
+      width: 100%;
+      max-width: min(520px, 94vw);
+      max-height: 90vh;
+      max-height: 90dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      text-align: center;
+      color: #ffffff;
+      transform: translateY(24px) scale(0.94);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Custom Scrollbar for Modals */
+    .modal-card-box::-webkit-scrollbar,
+    .explanation-container::-webkit-scrollbar {
+      width: 6px;
+    }
+    .modal-card-box::-webkit-scrollbar-thumb,
+    .explanation-container::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.3);
+      border-radius: 9999px;
+    }
+
+    .modal-overlay.active .modal-card-box {
+      transform: translateY(0) scale(1);
+    }
+
+    .modal-title-bold {
+      font-size: clamp(22px, 5vw, 32px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      margin-bottom: 6px;
+      text-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-subtitle {
+      font-size: clamp(12px, 3.2vw, 15px);
+      font-weight: 500;
+      opacity: 0.95;
+      margin-bottom: clamp(14px, 3vw, 22px);
+      line-height: 1.45;
+    }
+
+    .modal-bins-preview {
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+      gap: clamp(10px, 3vw, 20px);
+      margin-bottom: 8px;
+      padding: 8px 0;
+    }
+
+    .preview-bin-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .preview-bin-item img {
+      width: clamp(52px, 14vw, 76px);
+      height: clamp(52px, 14vw, 76px);
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.3));
+      transition: transform 0.25s ease;
+    }
+
+    .preview-bin-item:hover img {
+      transform: translateY(-4px) scale(1.06);
+    }
+
+    .preview-bin-item span {
+      font-size: clamp(10px, 2.6vw, 13px);
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: capitalize;
+    }
+
+    /* Modal Buttons */
+    .btn-pill-cta {
+      margin-top: clamp(14px, 3vw, 22px);
+      background: linear-gradient(90deg, #0d7056 0%, #159b77 50%, #1db88e 100%);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+      padding: clamp(10px, 2.5vw, 14px) clamp(28px, 6vw, 48px);
+      border-radius: 9999px;
+      font-size: clamp(14px, 3.5vw, 18px);
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      display: inline-block;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+      text-transform: none;
+      text-decoration: none;
+    }
+
+    .btn-pill-cta:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 14px 30px rgba(0, 0, 0, 0.45);
+      filter: brightness(1.1);
+    }
+
+    .btn-pill-cta:active {
+      transform: translateY(1px) scale(0.98);
+    }
+
+    /* ══════════════════════════════════════════════
+       MODAL 2: PENJELASAN (3 GLOSSY TEAL CARDS)
+       ══════════════════════════════════════════════ */
+    .explanation-container {
+      width: 100%;
+      max-width: min(580px, 94vw);
+      max-height: 90vh;
+      max-height: 90dvh;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(8px, 2vw, 14px);
+      transform: translateY(24px) scale(0.94);
+      transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+      padding: 4px;
+    }
+
+    .modal-overlay.active .explanation-container {
+      transform: translateY(0) scale(1);
+    }
+
+    .info-card-teal {
+      background: linear-gradient(90deg, #00766a 0%, #009d78 50%, #00b590 100%);
+      border: 2.5px solid #005a4e;
+      border-radius: clamp(14px, 3vw, 20px);
+      padding: clamp(10px, 2.5vw, 16px) clamp(12px, 3vw, 20px);
+      display: flex;
+      align-items: center;
+      gap: clamp(10px, 2.5vw, 16px);
+      box-shadow: 
+        inset 0 2px 4px rgba(255, 255, 255, 0.4),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.25),
+        0 10px 20px rgba(0, 0, 0, 0.3);
+      color: #ffffff;
+      transition: transform 0.25s ease;
+    }
+
+    .info-card-teal:hover {
+      transform: translateX(3px) scale(1.01);
+    }
+
+    .info-card-teal.card-reverse {
+      flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .info-card-teal img {
+      width: clamp(44px, 11vw, 64px);
+      height: clamp(44px, 11vw, 64px);
+      object-fit: contain;
+      flex-shrink: 0;
+      filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.3));
+    }
+
+    .info-card-text {
+      flex: 1;
+      font-size: clamp(11px, 2.6vw, 13.5px);
+      line-height: 1.45;
+    }
+
+    .info-card-text strong {
+      font-size: clamp(12.5px, 3vw, 15px);
+      font-weight: 800;
+      display: block;
+      margin-bottom: 2px;
+      color: #ffffff;
+    }
+
+    .btn-mulai-cta {
+      align-self: center;
+      margin-top: 6px;
+      background: linear-gradient(90deg, #00453b 0%, #00766a 50%, #009d77 100%);
+      border: 2px solid rgba(255, 255, 255, 0.45);
+      color: #ffffff;
+      padding: clamp(10px, 2.5vw, 13px) clamp(36px, 8vw, 60px);
+      border-radius: 9999px;
+      font-size: clamp(15px, 3.8vw, 19px);
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      cursor: pointer;
+      transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .btn-mulai-cta:hover {
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: 0 14px 32px rgba(0, 0, 0, 0.45);
+      filter: brightness(1.12);
+    }
+
+    /* ══════════════════════════════════════════════
+       MODAL 3: SELAMAT!! (VICTORY SCREEN)
+       ══════════════════════════════════════════════ */
+    .victory-title {
+      font-size: clamp(26px, 6.5vw, 38px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      text-shadow: 0 3px 10px rgba(0, 0, 0, 0.35);
+      color: #ffffff;
+    }
+
+    .victory-subtitle {
+      font-size: clamp(14px, 3.5vw, 19px);
+      font-weight: 700;
+      margin-bottom: 8px;
+      line-height: 1.35;
+      color: #c8f7dc;
+    }
+
+    .victory-score-pill {
+      display: inline-block;
+      background: rgba(0, 45, 36, 0.8);
+      border: 1.5px solid #00bd96;
+      color: #ffffff;
+      padding: 5px 18px;
+      border-radius: 9999px;
+      font-size: clamp(12px, 3vw, 14px);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .victory-desc {
+      font-size: clamp(11.5px, 2.7vw, 14px);
+      font-style: italic;
+      font-weight: 400;
+      opacity: 0.95;
+      line-height: 1.5;
+      max-width: 440px;
+      margin: 0 auto 16px;
+    }
+
+    .victory-btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .btn-victory-secondary {
+      background: rgba(255, 255, 255, 0.2);
+      border: 1.5px solid rgba(255, 255, 255, 0.5);
+      color: #ffffff;
+      padding: clamp(10px, 2.5vw, 13px) clamp(20px, 4vw, 32px);
+      border-radius: 9999px;
+      font-size: clamp(13px, 3vw, 15px);
+      font-weight: 700;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-victory-secondary:hover {
+      background: rgba(255, 255, 255, 0.35);
+      transform: translateY(-2px);
+    }
+
+    /* ══════════════════════════════════════════════
+       ERROR NOTIFICATION TOAST
+       ══════════════════════════════════════════════ */
+    .game-toast {
+      position: fixed;
+      top: 68px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-20px);
+      background: linear-gradient(135deg, #c0392b, #e74c3c);
+      color: #ffffff;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      font-size: clamp(11px, 2.7vw, 13.5px);
+      font-weight: 700;
+      box-shadow: 0 8px 24px rgba(231, 76, 60, 0.45);
+      border: 1.5px solid rgba(255, 255, 255, 0.4);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 90vw;
+      text-align: center;
+    }
+
+    .game-toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* ══════════════════════════════════════════════
+       RESPONSIVE BREAKPOINTS (MOBILE & TABLET & LAPTOP)
+       ══════════════════════════════════════════════ */
+    
+    /* Small mobile devices (iPhone SE, small Androids) */
+    @media (max-width: 480px) {
+      :root {
+        --waste-item-size: 52px;
+        --bins-station-height: 135px;
+        --hud-height: 52px;
+      }
+      .top-bar {
+        top: 8px;
+      }
+      .btn-back-home span {
+        display: none; /* Icon only on very small screens to save space */
+      }
+      .btn-back-home {
+        padding: 7px 10px;
+      }
+    }
+
+    /* Tablet & Medium Mobile */
+    @media (min-width: 481px) and (max-width: 768px) {
+      :root {
+        --waste-item-size: 64px;
+        --bins-station-height: 160px;
+        --hud-height: 56px;
+      }
+    }
+
+    /* Desktop & Laptop */
+    @media (min-width: 769px) {
+      :root {
+        --waste-item-size: 80px;
+        --bins-station-height: 200px;
+        --hud-height: 64px;
+      }
+    }
+
+    /* Landscape Mode for Mobile Phones (Short height viewport) */
+    @media (max-height: 520px) {
+      :root {
+        --waste-item-size: 46px;
+        --bins-station-height: 98px;
+        --hud-height: 44px;
+      }
+      .top-bar {
+        top: 6px;
+      }
+      #bins-station {
+        bottom: 4px;
+      }
+      .bin-label-badge {
+        font-size: 9.5px;
+        padding: 2px 8px;
+      }
+      .modal-card-box {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════════════
+       STAGE: FULLSCREEN GAMEPLAY
+       ══════════════════════════════════════════════ -->
+  <main id="game-stage">
+    
+    <!-- Top Bar HUD -->
+    <header class="top-bar">
+      <div class="hud-left">
+        <a href="../index.html#belajar-section" class="btn-back-home" title="Kembali ke Beranda">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"></polyline>
+          </svg>
+          <span>Kembali</span>
+        </a>
+      </div>
+
+      <div class="score-badge">
+        <span id="score-text">Sampah: 0 / 15</span>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progress-fill"></div>
+        </div>
+      </div>
+
+      <div class="hud-right">
+        <!-- Sound Toggle Button -->
+        <button class="hud-btn" id="btn-sound-toggle" title="Suara: Aktif">
+          <span id="sound-icon">🔊</span>
+        </button>
+
+        <!-- Restart Button -->
+        <button class="hud-btn" id="btn-restart-game" title="Ulangi Permainan">
+          ↻
+        </button>
+      </div>
+    </header>
+
+    <!-- Waste Spawn Field (Items scattered on floor) -->
+    <div id="waste-field"></div>
+
+    <!-- Bottom Bins Station (3 Recycling Bins) -->
+    <footer id="bins-station">
+      
+      <!-- Organik (Hijau) -->
+      <div class="bin-zone" data-category="organik" id="bin-organik">
+        <img src="img/Game-1/tempat-sampah-hijau.png" alt="Tempat Sampah Organik" class="bin-image">
+        <div class="bin-label-badge">
+          <span>Organik</span>
+        </div>
+      </div>
+
+      <!-- Anorganik (Kuning) -->
+      <div class="bin-zone" data-category="anorganik" id="bin-anorganik">
+        <img src="img/Game-1/tempat-sampah-kuning.png" alt="Tempat Sampah Anorganik" class="bin-image">
+        <div class="bin-label-badge">
+          <span>Anorganik</span>
+        </div>
+      </div>
+
+      <!-- B3 (Merah) -->
+      <div class="bin-zone" data-category="b3" id="bin-b3">
+        <img src="img/Game-1/tempat-sampah-merah.png" alt="Tempat Sampah B3" class="bin-image">
+        <div class="bin-label-badge">
+          <span>B3</span>
+        </div>
+      </div>
+
+    </footer>
+
+  </main>
+
+  <!-- Error Toast -->
+  <div class="game-toast" id="game-toast">
+    <span id="toast-msg">Salah tempat sampah! Coba pilah lagi ya.</span>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODAL 1: TUGAS KALIAN!
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay active" id="modal-tugas">
+    <div class="modal-card-box">
+      <h1 class="modal-title-bold">Tugas Kalian!</h1>
+      <p class="modal-subtitle">Memasukkan sampah ke tempat yang semestinya</p>
+
+      <div class="modal-bins-preview">
+        <div class="preview-bin-item">
+          <img src="img/Game-1/tempat-sampah-hijau.png" alt="Organik">
+          <span>Organik</span>
+        </div>
+        <div class="preview-bin-item">
+          <img src="img/Game-1/tempat-sampah-kuning.png" alt="Anorganik">
+          <span>Anorganik</span>
+        </div>
+        <div class="preview-bin-item">
+          <img src="img/Game-1/tempat-sampah-merah.png" alt="B3">
+          <span>B3</span>
+        </div>
+      </div>
+
+      <button class="btn-pill-cta" id="btn-tugas-lanjut">Lanjut</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODAL 2: PENJELASAN JENIS SAMPAH
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-penjelasan">
+    <div class="explanation-container">
+      
+      <!-- Card 1: Organik -->
+      <div class="info-card-teal">
+        <img src="img/Game-1/tempat-sampah-hijau.png" alt="Organik">
+        <div class="info-card-text">
+          <strong>Sampah Organik :</strong>
+          <p>Sampah dari makhluk hidup & sisa makanan yang mudah terurai alami.</p>
+        </div>
+      </div>
+
+      <!-- Card 2: Anorganik (reversed) -->
+      <div class="info-card-teal card-reverse">
+        <img src="img/Game-1/tempat-sampah-kuning.png" alt="Anorganik">
+        <div class="info-card-text">
+          <strong>Sampah Anorganik :</strong>
+          <p>Sampah dari bahan buatan/industri seperti plastik yang sulit terurai.</p>
+        </div>
+      </div>
+
+      <!-- Card 3: B3 -->
+      <div class="info-card-teal">
+        <img src="img/Game-1/tempat-sampah-merah.png" alt="B3">
+        <div class="info-card-text">
+          <strong>Sampah B3 (Bahan Berbahaya & Beracun) :</strong>
+          <p>Sampah zat berbahaya (baterai, aerosol, obat) butuh penanganan khusus.</p>
+        </div>
+      </div>
+
+      <button class="btn-mulai-cta" id="btn-penjelasan-mulai">Mulai Main</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODAL 3: SELAMAT!! (VICTORY)
+       ══════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-selamat">
+    <div class="modal-card-box">
+      <h1 class="victory-title">Selamat!!</h1>
+      <h2 class="victory-subtitle">Kalian Berhasil Menyelesaikan Tugas!</h2>
+      <div class="victory-score-pill">✓ 15/15 Sampah Berhasil Dipilah</div>
+      <p class="victory-desc">Hebat! Kalian sudah memahami dan mempraktikkan cara pemilahan sampah organik, anorganik, dan B3 dengan benar.</p>
+      
+      <div class="victory-btn-group">
+        <button class="btn-victory-secondary" id="btn-selamat-ulang">
+          ↻ Main Lagi
+        </button>
+        <a href="../index.html#belajar-section" class="btn-pill-cta" id="btn-selamat-kembali">
+          Kembali ke Beranda
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       GAME LOGIC & INTERACTIVE DUAL ENGINE (DRAG & TAP)
+       ══════════════════════════════════════════════ -->
+  <script>
+    (function () {
+      'use strict';
+
+      // ── Zero-dependency Web Audio API Synthesizer ──
+      const AudioController = {
+        ctx: null,
+        soundEnabled: true,
+        init() {
+          if (!this.ctx) {
+            const AudioCtx = window.AudioContext || window.webkitAudioContext;
+            if (AudioCtx) this.ctx = new AudioCtx();
+          }
+          if (this.ctx && this.ctx.state === 'suspended') {
+            this.ctx.resume();
+          }
+        },
+        toggleSound() {
+          this.soundEnabled = !this.soundEnabled;
+          const icon = document.getElementById('sound-icon');
+          const btn = document.getElementById('btn-sound-toggle');
+          if (this.soundEnabled) {
+            icon.textContent = '🔊';
+            btn.title = 'Suara: Aktif';
+            this.playSelect();
+          } else {
+            icon.textContent = '🔇';
+            btn.title = 'Suara: Hening';
+          }
+          return this.soundEnabled;
+        },
+        playSuccess() {
+          if (!this.soundEnabled) return;
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            
+            // Bright cheerful chime
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(523.25, now); // C5
+            osc.frequency.exponentialRampToValueAtTime(783.99, now + 0.12); // G5
+            gain.gain.setValueAtTime(0.28, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.32);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.32);
+          } catch(e) {}
+        },
+        playError() {
+          if (!this.soundEnabled) return;
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            
+            // Low error buzz
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sawtooth';
+            osc.frequency.setValueAtTime(170, now);
+            osc.frequency.linearRampToValueAtTime(110, now + 0.22);
+            gain.gain.setValueAtTime(0.18, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.25);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.25);
+          } catch(e) {}
+        },
+        playSelect() {
+          if (!this.soundEnabled) return;
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const now = this.ctx.currentTime;
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+            osc.type = 'sine';
+            osc.frequency.setValueAtTime(650, now);
+            osc.frequency.exponentialRampToValueAtTime(880, now + 0.08);
+            gain.gain.setValueAtTime(0.15, now);
+            gain.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+            osc.start(now);
+            osc.stop(now + 0.1);
+          } catch(e) {}
+        },
+        playVictory() {
+          if (!this.soundEnabled) return;
+          try {
+            this.init();
+            if (!this.ctx) return;
+            const notes = [523.25, 659.25, 783.99, 1046.50]; // C5 - E5 - G5 - C6
+            notes.forEach((freq, idx) => {
+              const now = this.ctx.currentTime + (idx * 0.11);
+              const osc = this.ctx.createOscillator();
+              const gain = this.ctx.createGain();
+              osc.type = 'triangle';
+              osc.frequency.setValueAtTime(freq, now);
+              gain.gain.setValueAtTime(0.3, now);
+              gain.gain.exponentialRampToValueAtTime(0.01, now + 0.35);
+              osc.connect(gain);
+              gain.connect(this.ctx.destination);
+              osc.start(now);
+              osc.stop(now + 0.38);
+            });
+          } catch(e) {}
+        }
+      };
+
+      const WASTE_PRESETS = [
+        { name: 'Apel', category: 'organik', img: 'img/Game-1/Apel.png' },
+        { name: 'Apel', category: 'organik', img: 'img/Game-1/Apel.png' },
+        { name: 'Wortel', category: 'organik', img: 'img/Game-1/Wortel.png' },
+        { name: 'Wortel', category: 'organik', img: 'img/Game-1/Wortel.png' },
+        { name: 'Daun Kering', category: 'organik', img: 'img/Game-1/Daun.png' },
+        
+        { name: 'Gelas Plastik', category: 'anorganik', img: 'img/Game-1/Gelas Plastik.png' },
+        { name: 'Gelas Plastik', category: 'anorganik', img: 'img/Game-1/Gelas Plastik.png' },
+        { name: 'Kantong Plastik', category: 'anorganik', img: 'img/Game-1/Kantong plastik.png' },
+        { name: 'Kantong Plastik', category: 'anorganik', img: 'img/Game-1/Kantong plastik.png' },
+        { name: 'Kemasan Snack', category: 'anorganik', img: 'img/Game-1/Kemasan Snack.png' },
+
+        { name: 'Kaleng Aerosol', category: 'b3', img: 'img/Game-1/Kaleng Aerosol.png' },
+        { name: 'Kaleng Aerosol', category: 'b3', img: 'img/Game-1/Kaleng Aerosol.png' },
+        { name: 'Botol Obat', category: 'b3', img: 'img/Game-1/Botol Obat.png' },
+        { name: 'Baterai Bekas', category: 'b3', img: 'img/Game-1/Baterai.png' },
+        { name: 'Baterai Bekas', category: 'b3', img: 'img/Game-1/Baterai.png' }
+      ];
+
+      const totalWasteCount = WASTE_PRESETS.length;
+      let sortedCount = 0;
+      
+      // Drag & Tap State
+      let activeDragEl = null;
+      let isDragging = false;
+      let pointerStartX = 0;
+      let pointerStartY = 0;
+      let dragOffset = { x: 0, y: 0 };
+      let selectedItem = null;
+
+      // DOM Elements
+      const stageEl = document.getElementById('game-stage');
+      const wasteField = document.getElementById('waste-field');
+      const binZones = document.querySelectorAll('.bin-zone');
+      const scoreText = document.getElementById('score-text');
+      const progressFill = document.getElementById('progress-fill');
+      const toastEl = document.getElementById('game-toast');
+      const toastMsg = document.getElementById('toast-msg');
+
+      const modalTugas = document.getElementById('modal-tugas');
+      const modalPenjelasan = document.getElementById('modal-penjelasan');
+      const modalSelamat = document.getElementById('modal-selamat');
+
+      const btnTugasLanjut = document.getElementById('btn-tugas-lanjut');
+      const btnPenjelasanMulai = document.getElementById('btn-penjelasan-mulai');
+      const btnRestartGame = document.getElementById('btn-restart-game');
+      const btnSoundToggle = document.getElementById('btn-sound-toggle');
+      const btnSelamatUlang = document.getElementById('btn-selamat-ulang');
+
+      // ── Modal Handlers ──
+      btnTugasLanjut.addEventListener('click', () => {
+        AudioController.init();
+        AudioController.playSelect();
+        modalTugas.classList.remove('active');
+        setTimeout(() => {
+          modalPenjelasan.classList.add('active');
+        }, 120);
+      });
+
+      btnPenjelasanMulai.addEventListener('click', () => {
+        AudioController.init();
+        AudioController.playSelect();
+        modalPenjelasan.classList.remove('active');
+      });
+
+      btnRestartGame.addEventListener('click', () => {
+        AudioController.playSelect();
+        resetAndSpawnGame();
+      });
+
+      btnSoundToggle.addEventListener('click', () => {
+        AudioController.toggleSound();
+      });
+
+      btnSelamatUlang.addEventListener('click', () => {
+        modalSelamat.classList.remove('active');
+        resetAndSpawnGame();
+      });
+
+      // ── Smart Dynamic Grid Coordinates Generator ──
+      function generateSpawnCoordinates(itemCount) {
+        const fieldRect = wasteField.getBoundingClientRect();
+        const width = fieldRect.width || window.innerWidth;
+        const height = fieldRect.height || (window.innerHeight - 250);
+        const isPortrait = height > width;
+
+        // Determine columns & rows based on orientation
+        let cols = 5;
+        let rows = 3;
+        if (isPortrait) {
+          cols = 3;
+          rows = 5;
+        } else if (width / height > 2.2) {
+          cols = 6;
+          rows = 3;
+        }
+
+        const gridSlots = [];
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            gridSlots.push({ col: c, row: r });
+          }
+        }
+
+        // Shuffle slots for organic random appearance
+        gridSlots.sort(() => Math.random() - 0.5);
+
+        const coords = [];
+        for (let i = 0; i < itemCount; i++) {
+          const slot = gridSlots[i % gridSlots.length];
+          // Base percentage position with safe margins
+          const marginX = 8;
+          const marginY = 8;
+          const usableW = 100 - (marginX * 2);
+          const usableH = 100 - (marginY * 2);
+
+          const cellW = usableW / cols;
+          const cellH = usableH / rows;
+
+          const baseX = marginX + (slot.col + 0.5) * cellW;
+          const baseY = marginY + (slot.row + 0.5) * cellH;
+
+          // Organic jitter within safe cell radius
+          const jitterX = (Math.random() - 0.5) * (cellW * 0.45);
+          const jitterY = (Math.random() - 0.5) * (cellH * 0.45);
+          const rot = Math.round((Math.random() - 0.5) * 28); // -14deg to +14deg
+
+          coords.push({
+            x: Math.max(6, Math.min(94, baseX + jitterX)),
+            y: Math.max(6, Math.min(94, baseY + jitterY)),
+            rot: rot
+          });
+        }
+
+        return coords;
+      }
+
+      // ── Spawn / Reset Game ──
+      function resetAndSpawnGame() {
+        wasteField.innerHTML = '';
+        sortedCount = 0;
+        deselectItem();
+        updateScoreHUD();
+
+        const coords = generateSpawnCoordinates(totalWasteCount);
+        const shuffledPresets = [...WASTE_PRESETS].sort(() => Math.random() - 0.5);
+
+        shuffledPresets.forEach((preset, index) => {
+          const coord = coords[index];
+          const itemEl = document.createElement('div');
+          itemEl.className = 'waste-item';
+          itemEl.dataset.category = preset.category;
+          itemEl.dataset.name = preset.name;
+          itemEl.id = `waste-${index}`;
+
+          itemEl.style.left = `${coord.x}%`;
+          itemEl.style.top = `${coord.y}%`;
+          itemEl.style.transform = `translate(-50%, -50%) rotate(${coord.rot}deg)`;
+
+          itemEl.dataset.initialLeft = `${coord.x}%`;
+          itemEl.dataset.initialTop = `${coord.y}%`;
+          itemEl.dataset.initialRot = coord.rot;
+
+          const img = document.createElement('img');
+          img.src = preset.img;
+          img.alt = preset.name;
+          img.draggable = false;
+          itemEl.appendChild(img);
+
+          attachPointerDrag(itemEl);
+          wasteField.appendChild(itemEl);
+        });
+      }
+
+      // ── Hybrid Interaction: Drag-and-Drop + Tap-to-Drop ──
+      function attachPointerDrag(el) {
+        el.addEventListener('pointerdown', onPointerDown);
+      }
+
+      function onPointerDown(e) {
+        if (e.button !== 0 && e.pointerType === 'mouse') return;
+        
+        AudioController.init();
+        activeDragEl = e.currentTarget;
+        isDragging = false;
+        pointerStartX = e.clientX;
+        pointerStartY = e.clientY;
+
+        const rect = activeDragEl.getBoundingClientRect();
+        
+        // On touch, slight vertical offset so thumb doesn't hide the item
+        const touchOffset = (e.pointerType === 'touch') ? 25 : 0;
+        dragOffset.x = e.clientX - (rect.left + rect.width / 2);
+        dragOffset.y = e.clientY - (rect.top + rect.height / 2) + touchOffset;
+
+        activeDragEl.setPointerCapture(e.pointerId);
+        activeDragEl.addEventListener('pointermove', onPointerMove);
+        activeDragEl.addEventListener('pointerup', onPointerUp);
+        activeDragEl.addEventListener('pointercancel', onPointerUp);
+      }
+
+      function onPointerMove(e) {
+        if (!activeDragEl) return;
+        
+        const dist = Math.hypot(e.clientX - pointerStartX, e.clientY - pointerStartY);
+        if (dist > 7 && !isDragging) {
+          isDragging = true;
+          activeDragEl.classList.add('dragging');
+          deselectItem();
+        }
+
+        if (!isDragging) return;
+
+        const fieldRect = wasteField.getBoundingClientRect();
+        const currentX = e.clientX - fieldRect.left - dragOffset.x;
+        const currentY = e.clientY - fieldRect.top - dragOffset.y;
+
+        activeDragEl.style.left = `${currentX}px`;
+        activeDragEl.style.top = `${currentY}px`;
+
+        checkHoverBins(e.clientX, e.clientY);
+      }
+
+      function onPointerUp(e) {
+        if (!activeDragEl) return;
+
+        const currentWaste = activeDragEl;
+        activeDragEl.releasePointerCapture(e.pointerId);
+        activeDragEl.removeEventListener('pointermove', onPointerMove);
+        activeDragEl.removeEventListener('pointerup', onPointerUp);
+        activeDragEl.removeEventListener('pointercancel', onPointerUp);
+
+        currentWaste.classList.remove('dragging');
+        activeDragEl = null;
+
+        // If it was a quick tap without drag, toggle selection
+        if (!isDragging) {
+          handleItemTap(currentWaste);
+          return;
+        }
+
+        // Check if dropped onto a bin
+        let matchedBin = null;
+        binZones.forEach(bin => {
+          bin.classList.remove('drag-over');
+          const rect = bin.getBoundingClientRect();
+          // Forgiving hitbox for drop
+          const hit = (
+            e.clientX >= rect.left - 20 &&
+            e.clientX <= rect.right + 20 &&
+            e.clientY >= rect.top - 40 &&
+            e.clientY <= rect.bottom + 25
+          );
+          if (hit) matchedBin = bin;
+        });
+
+        if (matchedBin) {
+          handleDropValidation(currentWaste, matchedBin);
+        } else {
+          snapBack(currentWaste);
+        }
+      }
+
+      function checkHoverBins(clientX, clientY) {
+        binZones.forEach(bin => {
+          const rect = bin.getBoundingClientRect();
+          const hit = (
+            clientX >= rect.left - 20 &&
+            clientX <= rect.right + 20 &&
+            clientY >= rect.top - 40 &&
+            clientY <= rect.bottom + 25
+          );
+          if (hit) {
+            bin.classList.add('drag-over');
+          } else {
+            bin.classList.remove('drag-over');
+          }
+        });
+      }
+
+      // ── Tap Selection Handling ──
+      function handleItemTap(itemEl) {
+        if (selectedItem === itemEl) {
+          deselectItem();
+        } else {
+          deselectItem();
+          selectedItem = itemEl;
+          itemEl.classList.add('selected');
+          AudioController.playSelect();
+
+          const hint = document.createElement('div');
+          hint.className = 'item-select-hint';
+          hint.id = 'select-hint';
+          hint.textContent = 'Pilih Tong! 👇';
+          itemEl.appendChild(hint);
+        }
+      }
+
+      function deselectItem() {
+        if (selectedItem) {
+          selectedItem.classList.remove('selected');
+          const hint = selectedItem.querySelector('#select-hint');
+          if (hint) hint.remove();
+          selectedItem = null;
+        }
+      }
+
+      // Tap on bin to drop selected item
+      binZones.forEach(bin => {
+        bin.addEventListener('pointerdown', (e) => {
+          if (selectedItem && !activeDragEl) {
+            e.stopPropagation();
+            const itemToDrop = selectedItem;
+            deselectItem();
+            handleDropValidation(itemToDrop, bin);
+          }
+        });
+      });
+
+      // Tap on empty stage area to deselect
+      stageEl.addEventListener('pointerdown', (e) => {
+        if (selectedItem && !e.target.closest('.waste-item') && !e.target.closest('.bin-zone')) {
+          deselectItem();
+        }
+      });
+
+      // ── Drop Validation & Animation Feedback ──
+      function handleDropValidation(itemEl, binEl) {
+        const itemCategory = itemEl.dataset.category;
+        const binCategory = binEl.dataset.category;
+
+        if (itemCategory === binCategory) {
+          // ✅ CORRECT!
+          AudioController.playSuccess();
+          showFloatingFeedback(binEl, '+1 Benar! ✓', 'correct');
+          
+          binEl.classList.add('correct-pulse');
+          setTimeout(() => binEl.classList.remove('correct-pulse'), 550);
+
+          // Animate item being absorbed into the bin
+          const binRect = binEl.getBoundingClientRect();
+          const fieldRect = wasteField.getBoundingClientRect();
+          const targetX = (binRect.left + binRect.width / 2) - fieldRect.left;
+          const targetY = (binRect.top + 30) - fieldRect.top;
+
+          itemEl.style.transition = 'all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          itemEl.style.left = `${targetX}px`;
+          itemEl.style.top = `${targetY}px`;
+          itemEl.classList.add('absorbing');
+
+          setTimeout(() => {
+            if (itemEl.parentNode) itemEl.parentNode.removeChild(itemEl);
+            sortedCount++;
+            updateScoreHUD();
+            checkVictory();
+          }, 380);
+
+        } else {
+          // ❌ INCORRECT!
+          AudioController.playError();
+          showFloatingFeedback(binEl, 'Salah Tempat! ✗', 'wrong');
+          showToast(`Oops! ${itemEl.dataset.name} bukan sampah ${binCategory}. Pilah lagi ya!`);
+
+          binEl.classList.add('wrong-shake');
+          setTimeout(() => binEl.classList.remove('wrong-shake'), 450);
+
+          snapBack(itemEl);
+        }
+      }
+
+      function snapBack(itemEl) {
+        itemEl.style.transition = 'all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+        itemEl.style.left = itemEl.dataset.initialLeft;
+        itemEl.style.top = itemEl.dataset.initialTop;
+        itemEl.style.transform = `translate(-50%, -50%) rotate(${itemEl.dataset.initialRot}deg)`;
+        setTimeout(() => {
+          itemEl.style.transition = '';
+        }, 420);
+      }
+
+      function showFloatingFeedback(binEl, text, type) {
+        const feedback = document.createElement('div');
+        feedback.className = `floating-feedback ${type}`;
+        feedback.textContent = text;
+        binEl.appendChild(feedback);
+        setTimeout(() => {
+          if (feedback.parentNode) feedback.parentNode.removeChild(feedback);
+        }, 900);
+      }
+
+      function showToast(message) {
+        toastMsg.textContent = message;
+        toastEl.classList.add('show');
+        clearTimeout(toastEl._timer);
+        toastEl._timer = setTimeout(() => {
+          toastEl.classList.remove('show');
+        }, 2400);
+      }
+
+      function updateScoreHUD() {
+        scoreText.textContent = `Sampah: ${sortedCount} / ${totalWasteCount}`;
+        const pct = Math.round((sortedCount / totalWasteCount) * 100);
+        progressFill.style.width = `${pct}%`;
+      }
+
+      // ── Victory Handler ──
+      function checkVictory() {
+        if (sortedCount >= totalWasteCount) {
+          setTimeout(() => {
+            AudioController.playVictory();
+            
+            // Festive confetti blasts
+            if (typeof confetti === 'function') {
+              confetti({
+                particleCount: 80,
+                spread: 70,
+                origin: { y: 0.6 }
+              });
+              setTimeout(() => {
+                confetti({
+                  particleCount: 60,
+                  angle: 60,
+                  spread: 55,
+                  origin: { x: 0 }
+                });
+                confetti({
+                  particleCount: 60,
+                  angle: 120,
+                  spread: 55,
+                  origin: { x: 1 }
+                });
+              }, 280);
+            }
+
+            modalSelamat.classList.add('active');
+          }, 450);
+        }
+      }
+
+      // ── Window Resize Listener to adapt layout smoothly ──
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          // Reposition unsorted items relative to new dimensions
+          const activeItems = wasteField.querySelectorAll('.waste-item:not(.absorbing)');
+          if (activeItems.length > 0) {
+            const coords = generateSpawnCoordinates(activeItems.length);
+            activeItems.forEach((itemEl, idx) => {
+              const coord = coords[idx];
+              itemEl.dataset.initialLeft = `${coord.x}%`;
+              itemEl.dataset.initialTop = `${coord.y}%`;
+              itemEl.style.left = `${coord.x}%`;
+              itemEl.style.top = `${coord.y}%`;
+            });
+          }
+        }, 250);
+      });
+
+      // ── Start Game on Load ──
+      resetAndSpawnGame();
+
+    })();
+  </script>
+</body>
+</html>
