@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Game 2: Proses Pengolahan — ReBorn Waste</title>
+  <style>
+    * { box-sizing: border-box; }
+    [hidden] { display: none !important; }
+    body { margin: 0; color: white; font-family: 'Segoe UI', Arial, sans-serif; background: #00685d; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    button { font: inherit; cursor: pointer; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #fff6a3; outline-offset: 5px; }
+    .recycling-app { min-height: 100svh; position: relative; overflow: hidden; background: url('img/game-2/Game 1.png') center / 100% 100% no-repeat; }
+    .topbar { position: relative; z-index: 3; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px clamp(18px, 4vw, 64px); }
+    .back, .badge { color: white; text-decoration: none; border: 1px solid #ffffff60; border-radius: 30px; padding: 10px 18px; background: #004e46aa; font-size: 13px; font-weight: 600; }
+    .badge { letter-spacing: 2px; font-size: 11px; }
+    .hud-controls { display: flex; align-items: center; gap: 10px; }
+    #btn-sound-toggle { width: 40px; height: 40px; border: 1px solid #ffffff70; border-radius: 50%; background: #ffffffed; font-size: 19px; }
+    .screen { transition: opacity 300ms ease, transform 300ms ease; }
+    .screen.leaving { opacity: 0; transform: translateY(-8px); }
+    #category-screen { min-height: calc(100svh - 92px); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding: 24px 20px 100px; position: relative; z-index: 2; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 3px; font-size: 12px; color: #bbffdf; font-weight: 700; margin: 0; }
+    h1 { font-size: clamp(25px, 3.5vw, 46px); text-align: center; line-height: 1.2; margin: 0; text-shadow: 0 3px 12px #003e38; }
+    .intro { max-width: 550px; text-align: center; margin: 0; line-height: 1.7; color: #e1fff5; }
+    .category-buttons { display: grid; grid-template-columns: repeat(3, 1fr); gap: clamp(12px, 3vw, 32px); width: min(740px, 100%); }
+    .category { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; padding: 24px 12px; min-height: 220px; color: white; border: 2px solid #75ffd3; border-radius: 24px; background: linear-gradient(145deg, #007766dd, #004e46dd); box-shadow: 0 12px 30px #003e3850, inset 0 1px 0 #ffffff30; transition: transform 180ms, background 180ms; }
+    .category:hover { transform: translateY(-6px); background: #00866ddd; }
+    .category img { width: 110px; height: 110px; object-fit: contain; filter: drop-shadow(0 8px 6px #003b3650); }
+    .category strong { font-size: 22px; }
+    .category span { font-size: 12px; color: #c1ffdf; }
+    #process-screen { min-height: calc(100svh - 92px); display: flex; flex-direction: column; align-items: center; padding: 20px 0 36px; }
+    .process-heading { padding: 0 20px; text-align: center; }
+    #process-title { font-size: clamp(24px, 3vw, 40px); margin-top: 12px; }
+    .description-box { position: relative; z-index: 2; width: min(580px, 88vw); margin: 24px auto 0; padding: 18px 24px; border: 2px solid #74ffd3; border-radius: 16px; background: #005a4fa8; backdrop-filter: blur(3px); text-align: center; min-height: 112px; display: flex; flex-direction: column; justify-content: center; }
+    #step-label { color: #adffdb; font-size: 12px; letter-spacing: 1px; font-weight: 700; }
+    .step-description { margin: 9px 0 0; line-height: 1.6; font-size: clamp(14px, 1.6vw, 17px); transition: opacity 300ms, transform 300ms; }
+    .step-description.fade-out { opacity: 0; transform: translateY(-5px); }
+    .step-description.fade-in { opacity: 1; transform: translateY(0); }
+    .conveyor { position: relative; width: 100%; height: clamp(145px, 22vh, 205px); overflow: hidden; margin: max(28px, calc(59.5svh - 395px)) 0 24px; border-block: 4px solid #e3c324; background: repeating-linear-gradient(72deg, #111 0 8px, #464646 8px 9px); box-shadow: 0 10px 25px #00362d60; }
+    #step-stage { position: relative; width: 100%; height: 100%; }
+    .step-image { position: absolute; left: 50%; top: 50%; width: clamp(110px, 16vw, 175px); height: 85%; object-fit: contain; transform: translate(-50%, -50%); transition: transform var(--conveyor-duration, 1000ms) cubic-bezier(.22,.8,.25,1), opacity 500ms; filter: drop-shadow(0 10px 6px #0008); }
+    .step-image.enter-from-left { transform: translate(calc(-50vw - 110%), -50%); opacity: 0; }
+    .step-image.center { transform: translate(-50%, -50%); opacity: 1; }
+    .step-image.exit-to-right { transform: translate(calc(50vw + 10%), -50%); opacity: 0; }
+    .controls { display: flex; flex-direction: column; align-items: center; gap: 17px; }
+    #next-button { color: white; padding: 13px 34px; border: 2px solid #7affd2; border-radius: 12px; background: #00ad8270; box-shadow: 0 0 12px #50ffd266, inset 0 0 8px #50ffd233; font-weight: 700; transition: transform 150ms, background 150ms; }
+    #next-button:hover { transform: scale(1.03); background: #00ad82bb; }
+    #next-button:disabled { cursor: wait; opacity: .65; }
+    #menu-button { background: transparent; border: 0; color: #e0fff2; font-size: 13px; text-decoration: underline; text-underline-offset: 4px; padding: 8px; }
+    #menu-button:disabled { opacity: .5; cursor: wait; }
+    #progress { display: flex; gap: 8px; justify-content: center; margin-top: 18px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: #ffffff40; }
+    .dot.done { background: #95ffd5; }
+    .dot.active { width: 24px; border-radius: 8px; background: white; }
+    @media (max-width: 600px) {
+      .topbar { padding: 16px; }
+      .badge { font-size: 9px; letter-spacing: 1px; padding: 10px 12px; }
+      #category-screen { padding-bottom: 50px; gap: 22px; }
+      .category { min-height: 160px; padding: 18px 6px; gap: 10px; border-radius: 16px; }
+      .category img { width: 75px; height: 75px; }
+      .category strong { font-size: 17px; }
+      .category span { font-size: 10px; }
+      .description-box { padding: 15px; }
+      .conveyor { margin-top: 35px; }
+    }
+    @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 1ms !important; animation-duration: 1ms !important; } }
+  </style>
+</head>
+<body>
+  <main class="recycling-app">
+    <header class="topbar">
+      <a class="back" href="1.belajar.html">← Kembali</a>
+      <div class="hud-controls"><span class="badge">REBORN WASTE · GAME 02</span><button type="button" id="btn-sound-toggle" title="Suara: Aktif" aria-label="Suara" aria-pressed="true"><span id="sound-icon" aria-hidden="true">🔊</span></button></div>
+    </header>
+    <section id="category-screen" class="screen" aria-labelledby="menu-title">
+      <p class="eyebrow">Dari sampah, jadi manfaat</p>
+      <h1 id="menu-title" tabindex="-1">Kenali proses daur ulang</h1>
+      <p class="intro">Sampah mana yang mau kamu lihat proses pengolahannya?<br>Pilih satu kategori untuk memulai perjalanan.</p>
+      <div class="category-buttons">
+        <button type="button" class="category" data-category="organic"><img src="img/game-2/semak (6) 1.png" alt=""><strong>Organik</strong><span>4 tahap pengolahan →</span></button>
+        <button type="button" class="category" data-category="plastic"><img src="img/game-2/semak (9) 1.png" alt=""><strong>Plastik</strong><span>6 tahap pengolahan →</span></button>
+        <button type="button" class="category" data-category="paper"><img src="img/game-2/semak (15) 1.png" alt=""><strong>Kertas</strong><span>5 tahap pengolahan →</span></button>
+      </div>
+    </section>
+    <section id="process-screen" class="screen" aria-labelledby="process-title" hidden>
+      <div class="process-heading"><p class="eyebrow">Perjalanan daur ulang</p><h1 id="process-title" tabindex="-1"></h1><div id="progress" aria-hidden="true"></div></div>
+      <div class="description-box" aria-live="polite" aria-atomic="true"><span id="step-label"></span><p id="step-description" class="step-description"></p></div>
+      <div class="conveyor"><div id="step-stage"></div></div>
+      <div class="controls"><button type="button" id="next-button">Selanjutnya →</button><button type="button" id="menu-button">Pilih kategori lain</button></div>
+    </section>
+  </main>
+  <script src="js/game-2.js"></script>
+</body>
+</html>
